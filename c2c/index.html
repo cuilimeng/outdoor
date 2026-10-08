@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C2C Trip</title>
+<style>
+:root {
+  --bg:#f3efe6;
+  --paper:#fffdf8;
+  --ink:#17312a;
+  --muted:#6f776f;
+  --forest:#173d33;
+  --forest2:#255648;
+  --sand:#d9b77c;
+  --amber:#f5d27c;
+  --amber2:#fff3cf;
+  --green:#246b4a;
+  --green-bg:#e7f4eb;
+  --red:#a44239;
+  --red-bg:#fbe9e5;
+  --line:#e3ddcf;
+  --shadow:0 18px 50px rgba(27,49,42,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:var(--bg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.55;
+}
+a{color:var(--forest2);word-break:break-all}
+.hero{
+  min-height:460px;
+  color:white;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(245,210,124,.95) 0 3%, rgba(245,210,124,.16) 4% 12%, transparent 13%),
+    linear-gradient(145deg,#234f41 0%,#173d33 55%,#102921 100%);
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  left:-5%; right:-5%; bottom:-1px; height:48%;
+  background:
+    linear-gradient(24deg,#1a352d 0 25%,transparent 25.2%),
+    linear-gradient(154deg,transparent 0 38%,#2b5245 38.2% 56%,transparent 56.2%),
+    linear-gradient(24deg,transparent 0 58%,#3d6657 58.2% 73%,transparent 73.2%);
+}
+.wrap{max-width:1120px;margin:auto;padding:0 22px}
+.hero .wrap{position:relative;z-index:2;padding-top:70px}
+.eyebrow{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#d7e8e1;font-weight:800}
+h1{font-size:clamp(58px,10vw,112px);line-height:.85;letter-spacing:-.06em;margin:18px 0 24px}
+.hero p{max-width:720px;font-size:19px;color:#e6eee9;margin:0}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.hero-stat{padding:10px 14px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);border-radius:999px;font-weight:700;font-size:13px}
+nav{position:sticky;top:0;z-index:20;background:rgba(243,239,230,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.06)}
+nav .wrap{display:flex;gap:8px;overflow:auto;padding-top:10px;padding-bottom:10px}
+nav a{white-space:nowrap;text-decoration:none;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px;color:var(--ink)}
+nav a:hover{background:#e8e1d4}
+section{padding:68px 0}
+section.alt{background:#ebe5d8}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:26px}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--forest2)}
+h2{font-size:clamp(32px,5vw,48px);letter-spacing:-.04em;margin:5px 0 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow)}
+.days{display:grid;gap:10px}
+.day-row{display:grid;grid-template-columns:70px 1fr;gap:14px;padding:15px 0;border-bottom:1px solid var(--line)}
+.day-row:last-child{border-bottom:0}
+.day-badge{font-weight:800;color:var(--forest2)}
+.day-row span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.prep-list{margin:0;padding-left:20px}
+.prep-list li{margin:10px 0}
+.table-wrap{overflow:auto;border-radius:20px;border:1px solid var(--line);background:var(--paper);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;min-width:820px;font-size:14px}
+th,td{padding:13px 14px;text-align:left;vertical-align:top;border-bottom:1px solid #eee8dc}
+th{background:#ede7db;font-size:12px;letter-spacing:.03em;position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fbf8f1}
+tr.altitude{background:var(--amber2)}
+tr.altitude:hover{background:#ffedb3}
+.summit-box{margin-top:18px;background:linear-gradient(135deg,#fff4cf,#fffdf8);border:1px solid #ecd294;border-radius:20px;padding:20px}
+.summit-box h3{margin:0 0 8px;font-size:20px}
+.summit-box ul{margin:0;padding-left:20px}
+.note-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.note-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 8px 22px rgba(27,49,42,.05)}
+.go{background:var(--green-bg);color:var(--green);font-weight:800}
+.review-cell{background:#fff2cf;color:#94651c;font-weight:800}
+.nogo{background:var(--red-bg);color:var(--red);font-weight:800}
+.gear-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.gear-item{display:flex;align-items:flex-start;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer}
+.gear-item input{position:absolute;opacity:0}
+.fake-check{width:22px;height:22px;border:2px solid #aeb6b1;border-radius:7px;flex:none;position:relative;margin-top:1px}
+.gear-item input:checked + .fake-check{background:var(--forest2);border-color:var(--forest2)}
+.gear-item input:checked + .fake-check:after{content:"✓";position:absolute;color:#fff;font-size:15px;font-weight:900;left:4px;top:-2px}
+.gear-item input:checked ~ .gear-text{text-decoration:line-through;opacity:.55}
+.gear-text{font-weight:700;font-size:14px}
+.gear-text small{display:block;font-weight:500;color:var(--muted);margin-top:3px}
+.footer{background:#102921;color:#d9e8e2;padding:44px 0}
+.footer strong{color:white}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer;background:#fff;color:var(--forest)}
+
+.live-controls{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  background:var(--paper);border:1px solid var(--line);border-radius:18px;
+  padding:14px 16px;margin-bottom:14px;box-shadow:0 8px 22px rgba(27,49,42,.05)
+}
+.live-controls>div{display:flex;align-items:center;gap:10px}
+.live-controls select{
+  border:1px solid #cfc7b8;background:#fff;border-radius:10px;padding:8px 10px;
+  color:var(--ink);font:inherit
+}
+.live-controls button{
+  background:var(--forest);color:white
+}
+#liveUpdated{font-size:12px;color:var(--muted);margin-left:auto}
+.live-status{
+  border-radius:16px;padding:14px 16px;margin-bottom:14px;font-weight:700
+}
+.live-status.loading{background:#edf1ee;color:#53645d}
+.live-status.ok{background:var(--green-bg);color:var(--green)}
+.live-status.error{background:var(--red-bg);color:var(--red)}
+.forecast-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.forecast-day{
+  background:var(--paper);border:1px solid var(--line);border-radius:22px;
+  padding:18px;box-shadow:0 10px 28px rgba(27,49,42,.06)
+}
+.forecast-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.forecast-date strong{display:block;font-size:20px}
+.forecast-date small{color:var(--muted)}
+.decision{
+  padding:7px 10px;border-radius:999px;font-weight:900;font-size:12px;white-space:nowrap
+}
+.decision.go{background:var(--green-bg);color:var(--green)}
+.decision.review{background:#fff2cf;color:#94651c}
+.decision.nogo{background:var(--red-bg);color:var(--red)}
+.decision.pending{background:#edf1ee;color:#5c6963}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.live-metric{
+  display:flex;justify-content:space-between;gap:10px;border-radius:11px;padding:9px 10px;
+  font-size:12px;background:#f5f1e8
+}
+.live-metric span:first-child{color:#66726c}
+.live-metric strong{text-align:right}
+.live-metric.green{background:var(--green-bg)}
+.live-metric.green strong{color:var(--green)}
+.live-metric.yellow{background:#fff2cf}
+.live-metric.yellow strong{color:#94651c}
+.live-metric.red{background:var(--red-bg)}
+.live-metric.red strong{color:var(--red)}
+.live-metric.unknown{background:#edf1ee}
+.live-metric.unknown strong{color:#627069}
+.day-reasons{margin:13px 0 0;padding-left:18px;color:#5f6964;font-size:12px}
+.day-reasons li{margin:4px 0}
+.live-note{
+  margin-top:14px;background:#f7f3e9;border:1px solid var(--line);
+  border-radius:16px;padding:14px 16px;color:#59645e;font-size:12px
+}
+
+.trail-report-box{
+  background:linear-gradient(135deg,#173d33,#255648);
+  color:white;border-radius:22px;padding:18px 20px;margin:14px 0;
+  box-shadow:0 12px 30px rgba(27,49,42,.12)
+}
+.trail-report-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.trail-report-head strong{display:block;font-size:18px;margin-top:3px}
+.trail-label{font-size:10px;letter-spacing:.14em;color:#cfe1d9;font-weight:800}
+.trail-report-summary{margin:12px 0;color:#e6f0eb;font-size:13px}
+.trail-report-box a{color:#ffd98b;font-size:12px;font-weight:800;text-decoration:none}
+
+
+.trail-metric-row{
+  margin-top:8px;
+  border-radius:12px;
+  padding:11px 12px;
+  font-size:12px;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:space-between;
+}
+.trail-metric-row span{
+  color:#66726c;
+  flex:0 0 auto;
+  font-weight:700;
+}
+.trail-metric-row strong{
+  text-align:right;
+  line-height:1.45;
+}
+.trail-metric-row.green{background:var(--green-bg)}
+.trail-metric-row.green strong{color:var(--green)}
+.trail-metric-row.yellow{background:#fff2cf}
+.trail-metric-row.yellow strong{color:#94651c}
+.trail-metric-row.red{background:var(--red-bg)}
+.trail-metric-row.red strong{color:var(--red)}
+.trail-metric-row.unknown{background:#edf1ee}
+.trail-metric-row.unknown strong{color:#627069}
+
+.trail-review-grid{grid-template-columns:1fr}
+}
+
+
+.trail-inline-review{
+  margin:10px 0 0 18px;
+  padding:0;
+  color:#59645e;
+  font-size:12px;
+}
+.trail-inline-review li{margin:4px 0}
+.trail-inline-review code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:#ece8de;
+  border-radius:5px;
+  padding:1px 4px;
+}
+
+@media(max-width:760px){
+  .trail-metric-row{display:block}
+  .trail-metric-row strong{display:block;text-align:left;margin-top:4px}
+}
+
+@media(max-width:760px){
+  .forecast-cards{grid-template-columns:1fr}
+  .metric-grid{grid-template-columns:1fr}
+  #liveUpdated{width:100%;margin-left:0}
+}
+
+@media(max-width:760px){
+  .hero{min-height:500px}
+  .hero .wrap{padding-top:52px}
+  .two-col,.note-grid,.gear-grid{grid-template-columns:1fr}
+  .section-head{display:block}
+  section{padding:50px 0}
+  .card{padding:18px}
+  table{font-size:13px;min-width:760px}
+}
+@media print{
+  nav,.toolbar{display:none}
+  body{background:white}
+  section{padding:34px 0}
+  .card,.table-wrap,.note-card{box-shadow:none}
+  .hero{min-height:auto;padding-bottom:35px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Cactus to Clouds</div>
+    <h1>C2C<br>Trip</h1>
+    <p>行程 · 时间表 · 安全事项 · 天气监测 · 装备清单</p>
+    <div class="hero-stats">
+      <div class="hero-stat">2:00 AM Skyline Trail</div>
+      <div class="hero-stat">~14.8 mi San Jacinto Peak</div>
+      <div class="hero-stat">10,834 ft</div>
+      <div class="hero-stat">~21.0 mi Tram Mountain Station</div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#trip">行程</a>
+    <a href="#schedule">时间表</a>
+    <a href="#safety">安全事项</a>
+    <a href="#weather">天气监测</a>
+    <a href="#metrics">Go / No-Go</a>
+    <a href="#live-forecast">未来天气判定</a>
+    <a href="#gear">装备清单</a>
+  </div>
+</nav>
+
+<main>
+<section id="trip">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Trip</div><h2>行程</h2></div>
+    </div>
+    <div class="two-col">
+      <div class="card days"><div class="day-row">
+      <div class="day-badge">周五</div>
+      <div><strong>请假，白天飞PSP，酒店check-in，休息</strong><span>Cactus to Clouds Trailhead附近酒店</span></div>
+    </div>
+<div class="day-row">
+      <div class="day-badge">周六</div>
+      <div><strong>凌晨步行至trail起点，开始爬，晚上回酒店休息</strong><span>Cactus to Clouds Trailhead附近酒店</span></div>
+    </div>
+<div class="day-row">
+      <div class="day-badge">周日</div>
+      <div><strong>飞回湾区</strong></div>
+    </div></div>
+      <div class="card">
+        <div class="kicker">准备工作</div>
+        <ul class="prep-list"><li>12:45–1:00 AM起床、吃东西、上厕所，1:30 AM左右到达Trailhead，整理装备。</li>
+<li>2:00 AM准时开始 Skyline Trail。</li>
+<li>建议起步携带约5-6L水/电解质；Long Valley之前不要依赖补水。</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="schedule" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Schedule</div><h2>上山</h2></div>
+      <div>黄色为高海拔上坡</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>预计时间</th><th>位置</th><th>累计距离</th><th>海拔</th><th>累计爬升</th><th>路段说明（黄色为高海拔上坡）</th></tr></thead>
+        <tbody><tr class="">
+      <td>2:00 AM</td><td>C2C / Skyline Trailhead</td><td>0.0 mi</td>
+      <td>~500 ft</td><td>0 ft</td><td>开始爬Skyline Trail；全程头灯</td>
+    </tr>
+<tr class="">
+      <td>3:30 AM</td><td>Rescue Box 1</td><td>~2.0 mi</td>
+      <td>~2,500 ft</td><td>~2,000 ft</td><td>第一个进度检查点；短休息、补充电解质</td>
+    </tr>
+<tr class="">
+      <td>6:00 AM</td><td>Rescue Box 2</td><td>~6.0 mi</td>
+      <td>~5,500 ft</td><td>~5,000 ft</td><td>天开始亮；检查水量、体力和整体配速</td>
+    </tr>
+<tr class="">
+      <td>7:00-7:15 AM</td><td>Flat Rock</td><td>~7.0 mi</td>
+      <td>~5,900 ft</td><td>~5,400 ft</td><td>休息10-15mins、吃东西；后面继续长距离爬升</td>
+    </tr>
+<tr class="">
+      <td>9:30-10:00 AM</td><td>Long Valley/Ranger Station</td><td>~9.0 mi</td>
+      <td>~8,400 ft</td><td>~8,000 ft</td><td>核心benchmark；休息、补水、吃饭、填写免费day-use wilderness permit</td>
+    </tr>
+<tr class="altitude">
+      <td>11:15 AM</td><td>Round Valley</td><td>~11.1 mi</td>
+      <td>~9,100 ft</td><td>~8,900 ft</td><td>有厕所；进入高海拔段，注意温度、风和体力</td>
+    </tr>
+<tr class="altitude">
+      <td>12:15 PM</td><td>Wellman Divide</td><td>~12.1 mi</td>
+      <td>~9,700 ft</td><td>~9,600 ft</td><td>重要决策点；检查天气、腿部状态和时间</td>
+    </tr>
+<tr class="altitude">
+      <td>1:30-2:00 PM</td><td>San Jacinto Peak</td><td>~14.8 mi</td>
+      <td>10,834 ft</td><td>~10,600 ft</td><td>登顶</td>
+    </tr></tbody>
+      </table>
+    </div>
+
+    <div class="summit-box">
+      <h3>山顶安排</h3>
+      <ul><li>在山顶停留约15-30mins、吃饭、拍照、加衣服。</li>
+<li>Peak处cutoff为2:00 PM。 最晚到这个时间开始下撤，不为了登顶继续拖延。</li></ul>
+    </div>
+
+    <div style="height:34px"></div>
+    <div class="section-head">
+      <div><div class="kicker">Schedule</div><h2>下山</h2></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>预计时间</th><th>位置</th><th>累计距离</th><th>海拔</th><th>累计下降</th><th>路段说明</th></tr></thead>
+        <tbody><tr><td>2:00 PM</td><td>离开San Jacinto Peak</td><td>~14.8 mi</td><td>10,834 ft</td><td>0 ft</td><td>正式下撤；如果13:30登顶可提前离开</td></tr>
+<tr><td>3:00 PM</td><td>Wellman Divide</td><td>~17.5 mi</td><td>~9,700 ft</td><td>~-1,100 ft</td><td>高海拔主要下降段完成一部分</td></tr>
+<tr><td>3:30-4:00 PM</td><td>Round Valley</td><td>~18.5 mi</td><td>~9,100 ft</td><td>~-1,700 ft</td><td>短休息、吃东西，准备最后一段</td></tr>
+<tr><td>4:30-5:00 PM</td><td>Long Valley/Ranger Station</td><td>~20.6 mi</td><td>~8,400 ft</td><td>~-2,400 ft</td><td>回到Long Valley；基本进入安全区</td></tr>
+<tr><td>5:00-5:30 PM</td><td>Tram Mountain Station</td><td>~21.0 mi</td><td>~8,500 ft</td><td>~-2,400 ft</td><td>回程最后还有一个很讨厌的小上坡；到达缆车站；换衣服、吃东西、准备下山</td></tr>
+<tr><td>5:30 PM以后</td><td>Palm Springs Aerial Tramway</td><td></td><td></td><td></td><td>坐缆车下山；不要把最后一班缆车当作计划余量</td></tr></tbody>
+      </table>
+    </div>
+    <div class="summit-box" style="margin-top:18px">叫Uber/Lyft回酒店。Tram Valley Station官方有专门的guest pickup/drop-off区，出租车也可以进去接人。</div>
+  </div>
+</section>
+
+<section id="safety">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Safety</div><h2>安全事项</h2></div>
+    </div>
+    <div class="note-grid"><div class='note-card'>Long Valley为核心benchmark：如果能在 9:30–10:00 到，而且状态不错，冲San Jacinto Peak的时间就比较充裕。</div>
+<div class='note-card'>Long Valley处cutoff为10:30 AM：如果超过10:30才到且已经明显疲劳，直接去Tram，不再冲峰。</div>
+<div class='note-card'>Wellman Divide处cutoff为12:30-1:00 PM：根据天气、风、冰雪、体力决定是否继续。</div>
+<div class='note-card'>缆车下车站不是C2C trailhead。提前预约Uber/Lyft或让valley station的customer service帮忙叫cab，约花费$30：https://cactustoclouds.com/2020/03/15/cactus-to-clouds-hike-faqs/。</div></div>
+  </div>
+</section>
+
+<section id="weather" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Weather</div><h2>天气监测</h2></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>地点</th><th>观测链接</th><th>预期状况</th></tr></thead>
+        <tbody><tr>
+      <td>Palm Springs山脚</td>
+      <td><a href="https://forecast.weather.gov/MapClick.php?lat=33.8269&amp;lon=-116.5437" target="_blank" rel="noopener">https://forecast.weather.gov/MapClick.php?lat=33.8269&amp;lon=-116.5437</a></td>
+      <td>预计当天最高温最好≤85°F；无Extreme Heat/Heat Advisory</td>
+    </tr>
+<tr>
+      <td>Palm Springs逐小时</td>
+      <td><a href="https://forecast.weather.gov/MapClick.php?FcstType=graphical&amp;lat=33.8253&amp;lon=-116.5504" target="_blank" rel="noopener">https://forecast.weather.gov/MapClick.php?FcstType=graphical&amp;lat=33.8253&amp;lon=-116.5504</a></td>
+      <td>2AM出发时最好55-70°F，上午不要升温太快</td>
+    </tr>
+<tr>
+      <td>San Jacinto Peak</td>
+      <td><a href="https://forecast.weather.gov/MapClick.php?lat=33.814463&amp;lon=-116.6791834" target="_blank" rel="noopener">https://forecast.weather.gov/MapClick.php?lat=33.814463&amp;lon=-116.6791834</a></td>
+      <td>阵风&lt;30mph；无降水；无雷暴；snow level不要掉到峰顶以下</td>
+    </tr>
+<tr>
+      <td>San Jacinto Peak</td>
+      <td><a href="https://www.mountain-forecast.com/peaks/Mount-San-Jacinto-Peak/forecasts/3293" target="_blank" rel="noopener">https://www.mountain-forecast.com/peaks/Mount-San-Jacinto-Peak/forecasts/3293</a></td>
+      <td>和上述网站交叉确认</td>
+    </tr>
+<tr>
+      <td>San Jacinto Trail Report</td>
+      <td><a href="https://sanjacjon.com/" target="_blank" rel="noopener">https://sanjacjon.com/author/sanjacjon/</a></td>
+      <td>确认trail状况</td>
+    </tr>
+<tr>
+      <td>Skyline</td>
+      <td><a href="https://www.parks.ca.gov/?page_id=30375" target="_blank" rel="noopener">https://www.parks.ca.gov/?page_id=30375</a></td>
+      <td>确认trail开放状态</td>
+    </tr>
+<tr>
+      <td>Tram天气</td>
+      <td><a href="https://pstramway.com/weather/" target="_blank" rel="noopener">https://pstramway.com/weather/</a></td>
+      <td>确认tram天气状况</td>
+    </tr>
+<tr>
+      <td>Tram官方运营时间</td>
+      <td><a href="https://pstramway.com/about-us/hours/" target="_blank" rel="noopener">https://pstramway.com/about-us/hours/</a></td>
+      <td>确认tram开放</td>
+    </tr></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="metrics">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Go / No-Go</div><h2>Go/No-Go Metrics</h2></div>
+      <div>从出发那周周一开始观测</div>
+    </div>
+    <div class="table-wrap">
+      <table style="min-width:860px">
+        <thead><tr><th>指标</th><th>GO</th><th>REVIEW / CAUTION</th><th>NO-GO</th></tr></thead>
+        <tbody><tr><td>Palm Springs 02:00温度</td><td class="go">50–70°F</td><td class="review-cell">&lt;50°F 或 70–75°F</td><td class="nogo">&gt;75°F</td></tr>
+<tr><td>Palm Springs 08:00温度</td><td class="go">&lt;75°F</td><td class="review-cell">75–80°F</td><td class="nogo">&gt;80°F</td></tr>
+<tr><td>Palm Springs 当天最高</td><td class="go">≤85°F</td><td class="review-cell">86–90°F</td><td class="nogo">&gt;90°F</td></tr>
+<tr><td>Heat Advisory</td><td class="go">No</td><td class="review-cell">—</td><td class="nogo">Yes</td></tr>
+<tr><td>Long Valley 白天温度</td><td class="go">40–60°F</td><td class="review-cell">30–40°F / 60–65°F</td><td class="nogo">&lt;30°F 且有风/降水</td></tr>
+<tr><td>Long Valley 降水概率</td><td class="go">0–10%</td><td class="review-cell">10–30%</td><td class="nogo">&gt;30%，尤其有雷暴/雪</td></tr>
+<tr><td>Long Valley Gust</td><td class="go">&lt;25 mph</td><td class="review-cell">25–35 mph</td><td class="nogo">&gt;35–40 mph</td></tr>
+<tr><td>Peak 13:00温度</td><td class="go">30–50°F</td><td class="review-cell">20–30°F</td><td class="nogo">&lt;20°F</td></tr>
+<tr><td>Peak Wind Chill</td><td class="go">&gt;25°F</td><td class="review-cell">10–25°F</td><td class="nogo">&lt;10°F</td></tr>
+<tr><td>Peak sustained wind</td><td class="go">&lt;20 mph</td><td class="review-cell">20–30 mph</td><td class="nogo">&gt;30 mph</td></tr>
+<tr><td>Peak Gust</td><td class="go">&lt;30 mph</td><td class="review-cell">30–40 mph</td><td class="nogo">&gt;40 mph</td></tr>
+<tr><td>Rain/Snow</td><td class="go">None</td><td class="review-cell">Very light / isolated</td><td class="nogo">明显雨、雪、冻雨</td></tr>
+<tr><td>Snow level</td><td class="go">有降水时 &gt;12,000 ft</td><td class="review-cell">10,500–12,000 ft</td><td class="nogo">&lt;10,500 ft 且有降水</td></tr>
+<tr><td>Thunderstorm</td><td class="go">No</td><td class="review-cell">—</td><td class="nogo">Yes</td></tr>
+<tr><td>Trail Report（人工查看）</td><td class="go">无 ice / spikes requirement</td><td class="review-cell">少量残雪 / 薄冰，路线可避开</td><td class="nogo">icy / microspikes recommended</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="live-forecast">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Live Forecast</div>
+        <h2>未来 6 天 Go / No-Go</h2>
+      </div>
+      <div>从明天开始 · NWS 自动判定</div>
+    </div>
+
+    <div class="live-controls">
+      <button id="refreshForecast" type="button">刷新全部数据</button>
+      <span id="liveUpdated">尚未加载</span>
+    </div>
+
+    <div id="liveStatus" class="live-status loading">
+      正在读取 Palm Springs、Long Valley 和 San Jacinto Peak 的 NWS 预报…
+    </div>
+
+    <div id="forecastCards" class="forecast-cards"></div>
+
+    <div class="live-note">
+      <strong>自动天气数据：</strong> Palm Springs 02:00 / 08:00 / 当天最高温、Heat Advisory；Long Valley 白天温度 / 降水概率 / gust；Peak 13:00 温度 / wind chill / sustained wind / gust / Rain-Snow / snow level / thunderstorm。<br>
+      <strong>Trail Report：</strong> 不参与自动 GO/NO-GO；请用上方天气监测链接人工查看最新报告。<br>
+      <strong>日期范围：</strong> 页面不显示今天，只显示从明天开始的未来 6 天。
+    </div>
+  </div>
+</section>
+
+<section id="gear" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Gear</div><h2>装备清单</h2></div>
+    </div>
+    <div class="gear-grid"><label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">防水背包</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">全套防风防水衣物（防风防水外壳上衣、防风防水长裤）</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">保暖中层（抓绒或轻量羽绒）</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">备用干爽上衣、袜子（湿衣服不及时换会失温）</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">保暖帽和遮阳帽</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">手套</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">Microspikes</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">登山鞋</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">登山杖</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">头灯</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">充电宝</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">5L水容量</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">电解质粉</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">高热量食物</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">防晒霜</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">墨镜</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">润唇膏</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">Wilderness permit<small>Limeng&#x27;s TODO</small></span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">离线地图</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">卫星电话<small>Limeng&#x27;s TODO</small></span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">急救物品</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">布洛芬/泰诺止痛药</span>
+    </label>
+<label class="gear-item">
+      <input type="checkbox">
+      <span class="fake-check"></span>
+      <span class="gear-text">卫生纸、密封垃圾袋</span>
+    </label></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <strong>C2C Trip</strong>
+    <div class="toolbar">
+      <button onclick="window.print()">打印 / 保存 PDF</button>
+      <button onclick="document.querySelectorAll('.gear-item input').forEach(x=>x.checked=false)">清空装备勾选</button>
+    </div>
+  </div>
+</footer>
+
+
+
+<script>
+(() => {
+  const TZ = 'America/Los_Angeles';
+  const LOC = {
+    palm: {name:'Palm Springs', lat:33.8269, lon:-116.5437},
+    long: {name:'Long Valley', lat:33.812620, lon:-116.642121},
+    peak: {name:'San Jacinto Peak', lat:33.814463, lon:-116.6791834}
+  };
+
+  // If the Trail Report website blocks a direct browser request, this current
+  // report snapshot is used as a fallback. Refreshing the HTML later can update it.
+  const TRAIL_FALLBACK = {
+    title: 'Weather and water update 7th October 2026',
+    date: '2026-10-07',
+    url: 'https://sanjacjon.com/',
+    text: `Forecasts are increasingly confident that there will be noteworthy precipitation and a dramatic cooling on 10th-13th October, coinciding with the holiday weekend. Rainfall at mid elevations may exceed one inch, largely falling on 11th but continuing to drizzle on 12th-13th.
+Windchills well below freezing, moderate rain, and even a dusting of snow (1-3 inches) above 9000 ft, are currently tentatively forecast for the high country on 11th-13th October.
+The conditions on 11th-13th October are tentatively forecast to be similar to those of last winter which resulted in multiple significant hypothermia cases in the San Jacinto high country. Hikers may well be ascending through rain, before encountering strong winds, frigid windchills, and possible snowfall at the highest elevations.
+Being fully prepared for wet weather and winter conditions will be critical. A clear understanding that turning around may well be the safest option is invaluable.
+TRAIL CONDITIONS
+Current water conditions are summarized in the introduction above.
+The first comprehensive trail trimming in decades is being undertaken by the Trail Report this year on the upper Peak Trail. About 90% of the 0.5 mile section of trail between 10,000 ft and the Miller Peak switchback had been widened to 2-4 feet by early October.
+Unmanaged chinquapin overgrowth had narrowed the trail to just 10-15 inches wide in many places, which was problematic year-round for pole users but especially in winter conditions.
+Deer Springs Trail from the trailhead to Little Round Valley was cleared of the handful of blowdowns from last winter by the Trail Report.`
+  };
+
+  const $ = s => document.querySelector(s);
+  const cards = $('#forecastCards');
+  const statusBox = $('#liveStatus');
+  const updated = $('#liveUpdated');
+
+  function pacificParts(d) {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: TZ, year:'numeric', month:'2-digit', day:'2-digit',
+      hour:'2-digit', minute:'2-digit', hourCycle:'h23', weekday:'short'
+    }).formatToParts(d).reduce((a,p)=>(a[p.type]=p.value,a),{});
+    return {
+      date:`${parts.year}-${parts.month}-${parts.day}`,
+      year:+parts.year, month:+parts.month, day:+parts.day,
+      hour:+parts.hour, minute:+parts.minute, weekday:parts.weekday
+    };
+  }
+
+  // Tomorrow through the following 5 days. Today is intentionally excluded.
+  function nextDates(n=6){
+    const now = new Date();
+    const arr=[];
+    for(let i=1;i<=n;i++){
+      arr.push(pacificParts(new Date(now.getTime()+i*86400000)).date);
+    }
+    return arr;
+  }
+
+  function cToF(c){ return c==null ? null : c*9/5+32; }
+  function kmhToMph(k){ return k==null ? null : k*0.621371; }
+  function round(v){ return v==null || Number.isNaN(v) ? null : Math.round(v); }
+
+  function maxWindText(s){
+    if(!s) return null;
+    const nums=[...String(s).matchAll(/(\d+(?:\.\d+)?)/g)].map(x=>+x[1]);
+    return nums.length ? Math.max(...nums) : null;
+  }
+
+  function isoDurationMs(s){
+    const m=String(s||'').match(/^P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
+    if(!m) return 3600000;
+    return ((+(m[1]||0))*24*3600 + (+(m[2]||0))*3600 + (+(m[3]||0))*60 + (+(m[4]||0)))*1000;
+  }
+
+  function gridValueAt(prop, when){
+    const vals=prop?.values || [];
+    const t=when.getTime();
+    for(const item of vals){
+      const [start,dur='PT1H']=item.validTime.split('/');
+      const a=new Date(start).getTime(), b=a+isoDurationMs(dur);
+      if(t>=a && t<b) return item.value;
+    }
+    return null;
+  }
+
+  function hourlyFor(data,date,hour){
+    const periods=data?.properties?.periods || [];
+    let best=null, bestDiff=1e9;
+    for(const p of periods){
+      const parts=pacificParts(new Date(p.startTime));
+      if(parts.date!==date) continue;
+      const diff=Math.abs(parts.hour-hour);
+      if(diff<bestDiff){best=p;bestDiff=diff;}
+    }
+    return bestDiff<=1 ? best : null;
+  }
+
+  function hourlyRange(data,date,startHour,endHour){
+    return (data?.properties?.periods || []).filter(p=>{
+      const x=pacificParts(new Date(p.startTime));
+      return x.date===date && x.hour>=startHour && x.hour<=endHour;
+    });
+  }
+
+  function statusPalmTemp(v, hour){
+    if(v==null) return 'unknown';
+    if(hour===2){
+      if(v>75) return 'red';
+      if(v>=50 && v<=70) return 'green';
+      return 'yellow';
+    }
+    if(hour===8){
+      if(v>80) return 'red';
+      if(v<75) return 'green';
+      return 'yellow';
+    }
+    return 'unknown';
+  }
+  function statusHigh(v){ if(v==null)return'unknown'; if(v>90)return'red'; if(v<=85)return'green'; return'yellow'; }
+  function statusPrecip(v){ if(v==null)return'unknown'; if(v>30)return'red'; if(v<=10)return'green'; return'yellow'; }
+  function statusLongGust(v){ if(v==null)return'unknown'; if(v>35)return'red'; if(v<25)return'green'; return'yellow'; }
+  function statusPeakTemp(v){ if(v==null)return'unknown'; if(v<20)return'red'; if(v>=30&&v<=50)return'green'; return'yellow'; }
+  function statusChill(v){ if(v==null)return'unknown'; if(v<10)return'red'; if(v>25)return'green'; return'yellow'; }
+  function statusWind(v){ if(v==null)return'unknown'; if(v>30)return'red'; if(v<20)return'green'; return'yellow'; }
+  function statusGust(v){ if(v==null)return'unknown'; if(v>40)return'red'; if(v<30)return'green'; return'yellow'; }
+  function metric(label,value,state){ return {label,value,state}; }
+
+  function stripHtml(s){
+    const d=document.createElement('div');
+    d.innerHTML=s||'';
+    return (d.textContent||d.innerText||'').replace(/\s+/g,' ').trim();
+  }
+
+  async function getTrailReport(){
+    // WordPress.com public API is the preferred live source.
+    try{
+      const u='https://public-api.wordpress.com/rest/v1.1/sites/sanjacjon.com/posts/?number=1';
+      const r=await fetch(u);
+      if(!r.ok) throw new Error('Trail API '+r.status);
+      const j=await r.json();
+      const p=j.posts?.[0];
+      if(!p) throw new Error('No trail post');
+      return {
+        title:stripHtml(p.title),
+        date:(p.date||'').slice(0,10),
+        url:p.URL||'https://sanjacjon.com/',
+        text:stripHtml(p.content)
+      };
+    }catch(e){
+      console.warn('Live Trail Report unavailable; using embedded current snapshot.',e);
+      return {...TRAIL_FALLBACK, fallback:true};
+    }
+  }
+
+  const MONTHS={
+    january:1,february:2,march:3,april:4,may:5,june:6,
+    july:7,august:8,september:9,october:10,november:11,december:12
+  };
+
+  function dateKey(y,m,d){
+    return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+
+
+  function sentenceList(text){
+    return String(text||'')
+      .replace(/\s+/g,' ')
+      .split(/(?<=[.!?])\s+|(?:\s*[•·]\s*)/)
+      .map(s=>s.trim())
+      .filter(Boolean);
+  }
+
+  function routeRelevantSentence(s){
+    const x=s.toLowerCase();
+
+    // C2C / summit-route terms.
+    const target=/\bpeak trail\b|\bwellman\b|\bround valley\b|\blong valley\b|\bskyline\b|\bsan jacinto peak\b|\bsummit\b|\bhigh country\b|\bupper peak trail\b/;
+    if(target.test(x)) return true;
+
+    // Generic current trail statements are useful if they don't name an unrelated route.
+    const generic=/\btrails?\b|\btrail conditions?\b|\babove\s+\d{4,5}\s*ft\b|\babove\s+\d{4,5}\s*feet\b/;
+    const otherRoute=/south ridge|devil'?s slide|marion mountain|seven pines|deer springs|spitler peak|palm canyon|pacific crest trail|\bpct\b/;
+    return generic.test(x) && !otherRoute.test(x);
+  }
+
+  function isHistoricalSentence(s){
+    const x=s.toLowerCase();
+    // Historical references should not override an explicit current state.
+    return /\b(?:yesterday|last week|last month|two weeks ago|a week ago|previously|earlier this month|earlier in the season|had been|used to be|before the storm)\b/.test(x)
+      && !/\b(?:now|currently|today|at present|as of|remains?|still)\b/.test(x);
+  }
+
+  function snowPercent(s){
+    const vals=[...String(s).matchAll(/(\d{1,3})\s*%\s*(?:snow|ice|cover|covered)/ig)].map(m=>+m[1]);
+    const vals2=[...String(s).matchAll(/(?:snow|ice)\s*(?:cover|covered)?[^.]{0,35}?(\d{1,3})\s*%/ig)].map(m=>+m[1]);
+    const all=[...vals,...vals2].filter(v=>v>=0&&v<=100);
+    return all.length ? Math.max(...all) : null;
+  }
+
+  function conditionDateFromSentence(s, reportDate){
+    const rp=String(reportDate||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(!rp) return null;
+    const year=+rp[1], reportMonth=+rp[2];
+    const m=String(s||'').match(/\b(?:on|as of|surveyed)\s+(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+)?(\d{1,2})(?:st|nd|rd|th)?(?:\s+(January|February|March|April|May|June|July|August|September|October|November|December))?/i);
+    if(!m) return null;
+    const month=m[2] ? MONTHS[m[2].toLowerCase()] : reportMonth;
+    return dateKey(year,month,+m[1]);
+  }
+
+  function hasCurrentMarker(s, reportDate){
+    const x=String(s||'').toLowerCase();
+    if(/\b(?:currently|at this time|now|today|still|remains?|as of)\b/.test(x)) return true;
+    const rp=String(reportDate||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(!rp) return false;
+    const day=+rp[3];
+    return new RegExp(`\\b${day}(?:st|nd|rd|th)?\\b`).test(x);
+  }
+
+  function sentenceSeverity(s){
+    const x=s.toLowerCase();
+    const pct=snowPercent(s);
+    const negTraction=/\b(?:microspikes?|spikes?)\b[^.]{0,45}\b(?:not required|no longer required|unnecessary|not needed)\b|\b(?:not required|no longer required|unnecessary|not needed)\b[^.]{0,45}\b(?:microspikes?|spikes?)\b/.test(x);
+    const tractionRecommended=!negTraction && /\b(?:microspikes?|spikes?)\b[^.]{0,55}\b(?:recommended|strongly recommended|advised|essential|required)\b/.test(x);
+    const tractionUseful=!negTraction && /\b(?:microspikes?|spikes?)\b[^.]{0,55}\b(?:useful|helpful|valuable)\b/.test(x);
+    const severeObjective=/\b(?:icy conditions?|continuous (?:snow|ice)|continuous icy snow|significant snow|deep snow|substantial snow|snow-covered|snow covered|hard ice|sheet ice|route (?:is )?obscured|trail (?:is )?obscured|obscured by (?:snow|ice))\b/.test(x) || /\b(?:snow|ice)\b[^.]{0,45}\b(?:covers?|covering)\b[^.]{0,30}\b(?:most|majority|nearly all|almost all)\b/.test(x) || (pct!=null && pct>=30);
+    const summitIce=/(?:peak trail|wellman|san jacinto peak|summit|high country)[^.]{0,180}\b(?:icy|ice|snow cover|snow-covered|snow covered)\b/.test(x);
+    const mild=/\b(?:small patches? of snow|minor patches? of snow|isolated patches? of snow|tiny patches? of snow|tiny icy patches?|thin icy patches?|very thin icy snow|thin ice|limited snow cover|patchy snow|patches? of snow|residual snow|remnant snow)\b/.test(x) || (pct!=null && pct>0 && pct<=20);
+    const avoidable=/\b(?:easily avoidable|readily avoidable|can be avoided|easy to avoid|mostly avoidable|pose no hazards?|posing any significant hazard)\b/.test(x);
+    const explicitClear=/\b(?:trails? (?:are )?clear of snow|functionally clear of snow|snow[- ]free|clear of ice|no snow on (?:the )?(?:peak trail|wellman|route)|no ice on (?:the )?(?:peak trail|wellman|route))\b/.test(x);
+    if(severeObjective || tractionRecommended || (summitIce && !mild) || (tractionUseful && (pct==null || pct>=30 || /\b(?:icy|ice)\b/.test(x)))) return {state:'red', reason:s.trim()};
+    if(mild && /\b(?:icy|ice)\b/.test(x)) return {state:'yellow', reason:s.trim()};
+    if(mild && negTraction && (avoidable || (pct!=null && pct<=10))) return {state:'green', reason:s.trim()};
+    if(mild || tractionUseful) return {state:'yellow', reason:s.trim()};
+    if(explicitClear || negTraction) return {state:'green', reason:s.trim()};
+    return {state:'unknown', reason:s.trim()};
+  }
+
+  function parseFutureTrailWindows(reportText, reportDate){
+    const text=String(reportText||'').replace(/\s+/g,' ');
+    const reportYear=+(reportDate||'').slice(0,4) || pacificParts(new Date()).year;
+    const windows=[];
+
+    const patterns=[
+      // 11th-14th October / 11 to 14 October / 11 through 14 October
+      /(\d{1,2})(?:st|nd|rd|th)?\s*(?:[-–—]|to|through)\s*(\d{1,2})(?:st|nd|rd|th)?\s+(January|February|March|April|May|June|July|August|September|October|November|December)/ig,
+      // October 11-14
+      /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:st|nd|rd|th)?\s*(?:[-–—]|to|through)\s*(\d{1,2})(?:st|nd|rd|th)?/ig
+    ];
+
+    for(const [pi,rex] of patterns.entries()){
+      let m;
+      while((m=rex.exec(text))){
+        let start,end,monthName;
+        if(pi===0){ start=+m[1]; end=+m[2]; monthName=m[3]; }
+        else { monthName=m[1]; start=+m[2]; end=+m[3]; }
+
+        const mon=MONTHS[monthName.toLowerCase()];
+        const before=Math.max(0,m.index-300), after=Math.min(text.length,m.index+m[0].length+650);
+        const ctx=text.slice(before,after);
+        const lc=ctx.toLowerCase();
+
+        const isForecast=/forecast|expected|possibility|possible|chance|likely|tentative|increasing|will be|may |could |anticipated|predicted/.test(lc);
+        if(!isForecast) continue;
+
+        const severe=
+          /hypothermia|well below freezing|below freezing|strong winds?|gale|moderate precipitation|heavy rain|significant snow|snowfall|dusting of snow|snow .*above|winter conditions?|icy conditions?|freezing rain|microspikes?|spikes recommended/.test(lc);
+        const caution=
+          /light snow|rain|showers?|cooling|windchill|breez|precipitation|cold front|storm/.test(lc);
+
+        const state=severe?'red':caution?'yellow':null;
+        if(!state) continue;
+
+        const snippets=[];
+        if(/snow/.test(lc)) snippets.push('snow');
+        if(/ice|icy|freezing rain/.test(lc)) snippets.push('ice');
+        if(/freezing|windchill/.test(lc)) snippets.push('freezing wind chill');
+        if(/strong winds?|gale/.test(lc)) snippets.push('strong wind');
+        if(/rain|precipitation|showers?/.test(lc)) snippets.push('rain / precipitation');
+        if(/hypothermia/.test(lc)) snippets.push('hypothermia risk');
+
+        for(let d=start; d<=end; d++){
+          windows.push({
+            date:dateKey(reportYear,mon,d),
+            state,
+            label:`Trail Report: ${start}–${end} ${monthName} · ${[...new Set(snippets)].join(' / ')}`
+          });
+        }
+      }
+    }
+    return windows;
+  }
+
+  function currentTrailState(report){
+    const raw=String(report.text||'');
+    const lower=raw.toLowerCase();
+    const trailIdx=lower.lastIndexOf('trail conditions');
+    const intro=trailIdx>=0 ? raw.slice(0,trailIdx) : '';
+    const scoped=trailIdx>=0 ? raw.slice(trailIdx+'trail conditions'.length) : raw;
+
+    const trailSentences=sentenceList(scoped).filter(routeRelevantSentence).filter(s=>!isHistoricalSentence(s));
+    const assessedTrail=trailSentences.map(s=>({s,date:conditionDateFromSentence(s,report.date),sev:sentenceSeverity(s)}));
+    const dated=assessedTrail.filter(x=>x.date && x.sev.state!=='unknown');
+    const latestDate=dated.length ? dated.map(x=>x.date).sort().slice(-1)[0] : null;
+    const candidates=assessedTrail.filter(x=>x.sev.state!=='unknown' && (!x.date || x.date===latestDate));
+
+    const introCandidates=sentenceList(intro)
+      .filter(routeRelevantSentence)
+      .filter(s=>hasCurrentMarker(s,report.date))
+      .filter(s=>!/\b(?:forecast|forecasted|expected|tentatively|possible|possibility|chance|likely|may|could|will)\b/i.test(s))
+      .map(s=>({s,date:conditionDateFromSentence(s,report.date),sev:sentenceSeverity(s)}))
+      .filter(x=>x.sev.state!=='unknown');
+    candidates.push(...introCandidates);
+
+    if(candidates.some(x=>x.sev.state==='red')) return {state:'red',label:'当前 C2C / Peak 路线存在明显积雪、结冰或 traction 警告'};
+    if(candidates.some(x=>x.sev.state==='yellow')) return {state:'yellow',label:'当前 C2C / Peak 路线有少量残雪 / 薄冰，需谨慎评估'};
+    if(candidates.some(x=>x.sev.state==='green')) return {state:'green',label:'Trail Report 显示 C2C / Peak 路线无明显雪冰或不需要 spikes'};
+
+    const ageDays=Math.abs((Date.now()-new Date(report.date+'T12:00:00-07:00').getTime())/86400000);
+    if(ageDays<=7) return {state:'green',label:'最新 Trail Conditions 未发现 C2C / Peak 路线当前冰雪 / traction 警告'};
+    return {state:'unknown',label:'Trail Report 较旧，无法可靠判定当前雪冰'};
+  }
+
+  function trailForDate(report,date){
+    const base=currentTrailState(report);
+    const windows=parseFutureTrailWindows(report.text,report.date);
+    const hit=windows.filter(w=>w.date===date);
+
+    if(hit.length){
+      // Future dated hazards override current dry/clear trail conditions.
+      const red=hit.find(w=>w.state==='red');
+      if(red) return red;
+      const yellow=hit.find(w=>w.state==='yellow');
+      if(yellow && base.state!=='red') return yellow;
+    }
+    return base;
+  }
+
+  function parseSnowLevel(forecast,date){
+    const periods=forecast?.properties?.periods || [];
+    const dayPeriods=periods.filter(p=>pacificParts(new Date(p.startTime)).date===date);
+    const text=dayPeriods.map(p=>`${p.shortForecast||''} ${p.detailedForecast||''}`).join(' ');
+    const ms=[...text.matchAll(/snow level(?:\s+\w+)*?\s+(?:to\s+)?([\d,]+)\s*(?:feet|ft)/ig)];
+    if(!ms.length) return null;
+    return Math.min(...ms.map(m=>+m[1].replace(/,/g,'')));
+  }
+
+  function detectWx(hours){
+    const text=hours.map(p=>`${p.shortForecast||''} ${p.detailedForecast||''}`).join(' ').toLowerCase();
+    return {
+      thunder:/thunder/.test(text),
+      snow:/snow|sleet|freezing rain|ice pellets/.test(text),
+      rain:/rain|shower/.test(text)
+    };
+  }
+
+  async function nwsPoint(loc){
+    const point=await fetch(`https://api.weather.gov/points/${loc.lat},${loc.lon}`).then(r=>{
+      if(!r.ok) throw new Error(`NWS points ${r.status}`); return r.json();
+    });
+    const p=point.properties;
+    const [hourly,forecast,grid]=await Promise.all([
+      fetch(p.forecastHourly).then(r=>r.json()),
+      fetch(p.forecast).then(r=>r.json()),
+      fetch(p.forecastGridData).then(r=>r.json())
+    ]);
+    return {hourly,forecast,grid};
+  }
+
+  async function getAlerts(){
+    const u=`https://api.weather.gov/alerts/active?point=${LOC.palm.lat},${LOC.palm.lon}`;
+    const j=await fetch(u).then(r=>r.json());
+    return j.features || [];
+  }
+
+  function decisionFrom(metrics){
+    const states=metrics.map(m=>m.state);
+    if(states.includes('red')) return {key:'nogo',label:'NO-GO'};
+    if(states.includes('yellow')) return {key:'review',label:'REVIEW'};
+    if(states.includes('unknown')) return {key:'pending',label:'待确认'};
+    return {key:'go',label:'GO'};
+  }
+
+  function buildDay(date, palm, lv, peak, alerts){
+    const p2=hourlyFor(palm.hourly,date,2);
+    const p8=hourlyFor(palm.hourly,date,8);
+    const pDay=hourlyRange(palm.hourly,date,0,23);
+    const pHigh=pDay.length ? Math.max(...pDay.map(x=>x.temperature).filter(Number.isFinite)) : null;
+
+    const lvHours=hourlyRange(lv.hourly,date,10,17);
+    const lvTemps=lvHours.map(x=>x.temperature).filter(Number.isFinite);
+    const lvTemp=lvTemps.length ? {min:Math.min(...lvTemps),max:Math.max(...lvTemps)} : null;
+    const lvPop=lvHours.length ? Math.max(...lvHours.map(x=>x.probabilityOfPrecipitation?.value ?? 0)) : null;
+    const lvGusts=lvHours.map(p=>gridValueAt(lv.grid.properties?.windGust,new Date(p.startTime)))
+      .filter(v=>v!=null).map(kmhToMph);
+    const lvGust=lvGusts.length ? Math.max(...lvGusts) : null;
+
+    const pk13=hourlyFor(peak.hourly,date,13);
+    const pkWindow=hourlyRange(peak.hourly,date,12,15);
+    const pkTemp=pk13?.temperature ?? null;
+    const pkWind=maxWindText(pk13?.windSpeed);
+    const pkGusts=pkWindow.map(p=>gridValueAt(peak.grid.properties?.windGust,new Date(p.startTime)))
+      .filter(v=>v!=null).map(kmhToMph);
+    const pkGust=pkGusts.length ? Math.max(...pkGusts) : null;
+
+    let pkChill=null;
+    if(pk13){
+      const raw=gridValueAt(peak.grid.properties?.windChill,new Date(pk13.startTime));
+      const raw2=raw==null ? gridValueAt(peak.grid.properties?.apparentTemperature,new Date(pk13.startTime)) : raw;
+      pkChill=cToF(raw2);
+    }
+
+    const pkPop=pkWindow.length ? Math.max(...pkWindow.map(x=>x.probabilityOfPrecipitation?.value ?? 0)) : null;
+    const wx=detectWx(pkWindow);
+    const snowLevel=parseSnowLevel(peak.forecast,date);
+
+    const heatAlerts=alerts.filter(a=>{
+      const e=(a.properties?.event||'').toLowerCase();
+      const start=a.properties?.onset ? new Date(a.properties.onset) : new Date(a.properties?.effective||0);
+      const end=a.properties?.ends ? new Date(a.properties.ends) : new Date(a.properties?.expires||0);
+      const dayStart=new Date(`${date}T00:00:00-07:00`);
+      const dayEnd=new Date(dayStart.getTime()+86400000);
+      return e.includes('heat') && end>=dayStart && start<=dayEnd;
+    });
+    const hasHeat=heatAlerts.length>0;
+
+    let longTempState='unknown';
+    if(lvTemp){
+      if(lvTemp.max>=40 && lvTemp.min<=60 && lvTemp.min>=30) longTempState='green';
+      else longTempState='yellow';
+      if(lvTemp.min<30 && ((lvPop??0)>0 || (lvGust??0)>=25)) longTempState='red';
+    }
+
+    let rainSnowState='green', rainSnowText='None';
+    if(wx.snow){ rainSnowState='red'; rainSnowText='Snow / wintry precip'; }
+    else if(wx.rain && (pkPop??0)>30){ rainSnowState='red'; rainSnowText=`Rain (${round(pkPop)}%)`; }
+    else if(wx.rain){ rainSnowState='yellow'; rainSnowText=`Showers (${round(pkPop)}%)`; }
+
+    let snowState='unknown', snowText='未提供';
+    if((pkPop??0)===0 && !wx.rain && !wx.snow){ snowState='green'; snowText='无降水，不触发'; }
+    else if(snowLevel!=null){
+      snowText=`${snowLevel.toLocaleString()} ft`;
+      if(snowLevel<10500) snowState='red';
+      else if(snowLevel>12000) snowState='green';
+      else snowState='yellow';
+    }
+
+    const metrics=[
+      metric('Palm Springs 02:00', p2 ? `${p2.temperature}°F` : '—', statusPalmTemp(p2?.temperature,2)),
+      metric('Palm Springs 08:00', p8 ? `${p8.temperature}°F` : '—', statusPalmTemp(p8?.temperature,8)),
+      metric('Palm Springs High', pHigh!=null ? `${round(pHigh)}°F` : '—', statusHigh(pHigh)),
+      metric('Heat Advisory', hasHeat ? 'Yes' : 'No', hasHeat?'red':'green'),
+      metric('Long Valley 10–17时温度', lvTemp ? `${round(lvTemp.min)}–${round(lvTemp.max)}°F` : '—', longTempState),
+      metric('Long Valley 降水', lvPop!=null ? `${round(lvPop)}%` : '—', statusPrecip(lvPop)),
+      metric('Long Valley Gust', lvGust!=null ? `${round(lvGust)} mph` : '—', statusLongGust(lvGust)),
+      metric('Peak 13:00 温度', pkTemp!=null ? `${round(pkTemp)}°F` : '—', statusPeakTemp(pkTemp)),
+      metric('Peak Wind Chill', pkChill!=null ? `${round(pkChill)}°F` : '—', statusChill(pkChill)),
+      metric('Peak sustained wind', pkWind!=null ? `${round(pkWind)} mph` : '—', statusWind(pkWind)),
+      metric('Peak Gust 12–15时', pkGust!=null ? `${round(pkGust)} mph` : '—', statusGust(pkGust)),
+      metric('Rain / Snow', rainSnowText, rainSnowState),
+      metric('Snow level', snowText, snowState),
+      metric('Thunderstorm', wx.thunder?'Yes':'No', wx.thunder?'red':'green')
+    ];
+
+    return {date,metrics};
+  }
+
+  function fmtDate(s){
+    const d=new Date(`${s}T12:00:00-07:00`);
+    return new Intl.DateTimeFormat('zh-CN',{timeZone:TZ,month:'numeric',day:'numeric',weekday:'short'}).format(d);
+  }
+
+  function render(days){
+    cards.innerHTML=days.map(day=>{
+      const d=decisionFrom(day.metrics);
+
+      const regularMetrics = day.metrics;
+
+      return `<article class="forecast-day">
+        <div class="forecast-top">
+          <div class="forecast-date"><strong>${fmtDate(day.date)}</strong><small>${day.date}</small></div>
+          <span class="decision ${d.key}">${d.label}</span>
+        </div>
+        <div class="metric-grid">
+          ${regularMetrics.map(m=>`<div class="live-metric ${m.state}">
+            <span>${m.label}</span><strong>${m.value}</strong>
+          </div>`).join('')}
+        </div>
+      </article>`;
+    }).join('');
+  }
+
+  async function load(){
+    statusBox.className='live-status loading';
+    statusBox.textContent='正在读取 Palm Springs、Long Valley 和 San Jacinto Peak 的 NWS 预报…';
+    cards.innerHTML='';
+    try{
+      const [palm,lv,peak,alerts]=await Promise.all([
+        nwsPoint(LOC.palm),nwsPoint(LOC.long),nwsPoint(LOC.peak),getAlerts()
+      ]);
+      const days=nextDates(6).map(date=>buildDay(date,palm,lv,peak,alerts));
+      render(days);
+
+      statusBox.className='live-status ok';
+      statusBox.innerHTML=`NWS 数据已更新并完成自动判定。Trail Report 请人工查看。
+      <ul class="trail-inline-review">
+        <li>搜索词：<code>snow / ice / icy / microspikes / spikes / Peak Trail / Wellman / Skyline</code></li>
+        <li><strong>Go：</strong>trails are clear of snow / functionally clear of snow / spikes not required，且 Peak / Wellman 没有明显冰雪。</li>
+        <li><strong>Review：</strong>small patches of snow / thin icy patches / 少量残雪且可避开；继续结合夜间低温、风和路线描述判断。</li>
+        <li><strong>No-Go：</strong>icy conditions / microspikes recommended / snow on Peak Trail / significant snow above 9000 ft / 路线被冰雪遮挡。</li>
+      </ul>`;
+
+      updated.textContent='更新时间：'+new Intl.DateTimeFormat('zh-CN',{
+        timeZone:TZ,month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'
+      }).format(new Date());
+    }catch(err){
+      console.error(err);
+      statusBox.className='live-status error';
+      statusBox.innerHTML='自动天气抓取失败。请检查网络；如果聊天 App 的 HTML 预览限制联网，请用 Safari / Chrome 打开此文件后点“刷新全部数据”。';
+      updated.textContent='加载失败';
+    }
+  }
+
+  $('#refreshForecast').addEventListener('click',load);
+  load();
+})();
+</script>
+
+</body>
+</html>
