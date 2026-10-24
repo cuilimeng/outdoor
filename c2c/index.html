@@ -408,6 +408,9 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     </tr></tbody>
       </table>
     </div>
+    <div class="live-note" style="margin-top:12px">
+      <strong>Long Valley 组合规则：</strong>最低温 &lt;25°F 时可单独触发 NO-GO。若最低温在 25–&lt;30°F，则只有在同时出现 ≥25 mph 阵风，或 NWS 结构化天气明确有雨 / 雪 / 冰信号时，才升级为 NO-GO。降水概率本身按 ≤10% / &gt;10–50% / &gt;50% 分为 GO / REVIEW / NO-GO。
+    </div>
 
     <div class="summit-box">
       <h3>山顶安排</h3>
@@ -457,17 +460,17 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
         <tbody><tr>
       <td>Palm Springs山脚</td>
       <td><a href="https://forecast.weather.gov/MapClick.php?lat=33.8269&amp;lon=-116.5437" target="_blank" rel="noopener">https://forecast.weather.gov/MapClick.php?lat=33.8269&amp;lon=-116.5437</a></td>
-      <td>预计当天最高温最好≤85°F；无Extreme Heat/Heat Advisory</td>
+      <td>重点看 02:00 / 08:00 实际温度，并确认无 NWS 高温警报</td>
     </tr>
 <tr>
       <td>Palm Springs逐小时</td>
       <td><a href="https://forecast.weather.gov/MapClick.php?FcstType=graphical&amp;lat=33.8253&amp;lon=-116.5504" target="_blank" rel="noopener">https://forecast.weather.gov/MapClick.php?FcstType=graphical&amp;lat=33.8253&amp;lon=-116.5504</a></td>
-      <td>2AM出发时最好55-70°F，上午不要升温太快</td>
+      <td>02:00 ≤75°F 为 GO；08:00 ≤80°F 为 GO；更高时按下方阈值复核</td>
     </tr>
 <tr>
       <td>San Jacinto Peak</td>
       <td><a href="https://forecast.weather.gov/MapClick.php?lat=33.814463&amp;lon=-116.6791834" target="_blank" rel="noopener">https://forecast.weather.gov/MapClick.php?lat=33.814463&amp;lon=-116.6791834</a></td>
-      <td>阵风&lt;30mph；无降水；无雷暴；snow level不要掉到峰顶以下</td>
+      <td>重点看 13:00 温度 / 体感 / 风速、12–15 时阵风 / 降水概率 / 雷暴，以及有降水时的雪线高度</td>
     </tr>
 <tr>
       <td>San Jacinto Peak</td>
@@ -513,25 +516,24 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     <div class="table-wrap">
       <table style="min-width:860px">
         <thead><tr><th>指标</th><th>GO</th><th>REVIEW / CAUTION</th><th>NO-GO</th></tr></thead>
-        <tbody><tr><td>Palm Springs 02:00温度</td><td class="go">50–70°F</td><td class="review-cell">&lt;50°F 或 &gt;70–75°F</td><td class="nogo">&gt;75°F</td></tr>
-<tr><td>Palm Springs 08:00温度</td><td class="go">&lt;75°F</td><td class="review-cell">75–80°F</td><td class="nogo">&gt;80°F</td></tr>
-<tr><td>Palm Springs 当天最高</td><td class="go">≤85°F</td><td class="review-cell">86–90°F</td><td class="nogo">&gt;90°F</td></tr>
+        <tbody><tr><td>Palm Springs 02:00温度</td><td class="go">≤75°F</td><td class="review-cell">&gt;75–80°F</td><td class="nogo">&gt;80°F</td></tr>
+<tr><td>Palm Springs 08:00温度</td><td class="go">≤80°F</td><td class="review-cell">&gt;80–85°F</td><td class="nogo">&gt;85°F</td></tr>
 <tr><td>NWS 高温警报</td><td class="go">No</td><td class="review-cell">—</td><td class="nogo">Yes</td></tr>
-<tr><td>Long Valley 温度<br><small>10–17时</small></td><td class="go">整个区间 40–60°F</td><td class="review-cell">超出 40–60°F，且未触发 NO-GO</td><td class="nogo">最低 &lt;30°F 且降水概率 &gt;0% 或阵风 ≥25 mph</td></tr>
-<tr><td>Long Valley 降水概率<br><small>10–17时 · 最高小时</small></td><td class="go">≤10%</td><td class="review-cell">&gt;10–30%</td><td class="nogo">&gt;30%</td></tr>
+<tr><td>Long Valley 温度<br><small>10–17时</small></td><td class="go">35–65°F</td><td class="review-cell">25–&lt;35°F，或 &gt;65°F</td><td class="nogo">&lt;25°F；或最低温 &lt;30°F，且同时满足以下任一项：<br><small>① 阵风 ≥25 mph；② NWS 明确有雨 / 雪 / 冰信号</small></td></tr>
+<tr><td>Long Valley 降水概率<br><small>10–17时 · 最高小时</small></td><td class="go">≤10%</td><td class="review-cell">&gt;10–50%</td><td class="nogo">&gt;50%</td></tr>
 <tr><td>Long Valley 阵风<br><small>10–17时</small></td><td class="go">&lt;25 mph</td><td class="review-cell">25–35 mph</td><td class="nogo">&gt;35 mph</td></tr>
-<tr><td>Peak 温度<br><small>13:00</small></td><td class="go">30–50°F</td><td class="review-cell">20–&lt;30°F 或 &gt;50°F</td><td class="nogo">&lt;20°F</td></tr>
+<tr><td>Peak 温度<br><small>13:00</small></td><td class="go">≥30°F</td><td class="review-cell">20–&lt;30°F</td><td class="nogo">&lt;20°F</td></tr>
 <tr><td>Peak 体感温度<br><small>13:00</small></td><td class="go">&gt;25°F</td><td class="review-cell">10–25°F</td><td class="nogo">&lt;10°F</td></tr>
 <tr><td>Peak 风速<br><small>13:00</small></td><td class="go">&lt;20 mph</td><td class="review-cell">20–30 mph</td><td class="nogo">&gt;30 mph</td></tr>
 <tr><td>Peak 阵风<br><small>12–15时</small></td><td class="go">&lt;30 mph</td><td class="review-cell">30–40 mph</td><td class="nogo">&gt;40 mph</td></tr>
-<tr><td>Peak 降水概率<br><small>12–15时 · 最高小时</small></td><td class="go">≤10%</td><td class="review-cell">&gt;10–30%</td><td class="nogo">&gt;30%</td></tr>
-<tr><td>雪线高度</td><td class="go">未触发，或触发时 &gt;12,000 ft</td><td class="review-cell">触发时 10,500–12,000 ft</td><td class="nogo">触发时 &lt;10,500 ft</td></tr>
+<tr><td>Peak 降水概率<br><small>12–15时 · 最高小时</small></td><td class="go">≤10%</td><td class="review-cell">&gt;10–50%</td><td class="nogo">&gt;50%</td></tr>
+<tr><td>雪线高度</td><td class="go">无相关降水；或有相关降水且 &gt;11,500 ft</td><td class="review-cell">有相关降水且 ≤11,500 ft<br><small>低雪线本身最多到 REVIEW</small></td><td class="nogo">雪线高度本身不判 NO-GO<br><small>NWS 明确冻雨 / 结冰等危险信号仍可直接 NO-GO</small></td></tr>
 <tr><td>雷暴概率<br><small>12–15时 · 最高小时</small></td><td class="go">&lt;10%</td><td class="review-cell">10–19%</td><td class="nogo">≥20%<br><small>若概率字段未发布，但 NWS weather grid 明确为 thunderstorms，也按 NO-GO</small></td></tr>
 <tr><td>Trail Report（人工查看）</td><td class="go">无 ice / spikes requirement</td><td class="review-cell">少量残雪 / 薄冰，路线可避开</td><td class="nogo">icy / microspikes recommended</td></tr></tbody>
       </table>
     </div>
     <div class="live-note" style="margin-top:12px">
-      <strong>雪线触发条件：</strong>Peak 降水概率 &gt;10%，或 NWS weather grid 明确出现 snow / freezing rain / freezing drizzle / sleet / ice crystals。
+      <strong>雪线逻辑：</strong>无相关降水时仅作为信息显示；有相关降水且雪线 &gt;11,500 ft 为 GO，≤11,500 ft 为 REVIEW。低雪线本身不再自动触发 NO-GO。若 NWS weather grid 明确出现 freezing rain / freezing drizzle / sleet 等结冰性降水，则仍直接 NO-GO；新雪或冰面是否会影响必经路线，继续结合 Trail Report 人工判断。
     </div>
   </div>
 </section>
@@ -580,9 +582,7 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     <div id="trendCards" class="trend-cards"></div>
 
     <div class="live-note">
-      <strong>正式判断：</strong> 仅使用 NWS JSON 的结构化字段：hourly / forecast / raw grid / active alerts。Palm Springs 02:00 / 08:00、daytime high；Long Valley 10–17 时温度 / 降水概率 / 阵风；Peak 13:00 温度 / 体感温度 / 风速、12–15 时阵风 / 降水概率 / 雷暴概率，以及 raw-grid snowLevel。雷暴优先用 probabilityOfThunder；若该字段未发布，则只参考同一 raw-grid weather 是否明确出现 thunderstorm。Peak 体感温度直接读取 NWS raw-grid apparentTemperature（NWS 定义为 heat index 或 wind chill）；Peak 风速直接读取 raw-grid windSpeed（maximum prevailing wind speed）。天气文字不做正则解析；任一要求完整窗口的小时数据缺失时，该指标直接显示未知，不用残缺数据计算。<br>
-      <strong>趋势预览：</strong> 仅使用 Open‑Meteo JSON 结构化字段。请求采用 Unix/UTC 时间戳，再由浏览器转换成 America/Los_Angeles，以正确处理 11 月 DST；降水概率、降雪量、阵风按官方“preceding hour”定义对齐路线时间窗口；任何窗口只要缺一个小时就显示未知，不用残缺数据做 max/sum。每项仅按阈值使用底色提示，不显示 GO / REVIEW / NO-GO 文本，也不汇总成当天最终结论。降雪量趋势规则：≤0.01 in = GO，&gt;0.01–0.50 in = REVIEW，&gt;0.50 in = NO-GO（这是本页面自定义趋势阈值，不是 Open‑Meteo 官方等级）。页面显示的 降水概率 是指定窗口内“最高单小时 降水概率”，不是整个窗口至少发生一次降水的联合概率。Open‑Meteo 的 降水概率 来自 ensemble 模型，文档注明其基础分辨率约 0.25°（~27 km），因此 Peak 降水概率 只是远期趋势信号。<br>
-      <strong>Trail Report：</strong> 仅人工查看；页面不再包含 Trail Report 自动 NLP / 正则判定代码。
+      <strong>说明：</strong>NWS 用于正式天气判断；Open‑Meteo 仅用于较远日期的趋势预览。Trend 只显示颜色提示，不作为最终 GO / REVIEW / NO-GO 结论。Trail Report 继续人工查看。
     </div>
   </div>
 </section>
@@ -775,6 +775,10 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     return arr;
   }
 
+  function isPastClock(nowParts,hour,minute=0){
+    return nowParts.hour>hour || (nowParts.hour===hour && nowParts.minute>minute);
+  }
+
   function cToF(c){ return c==null ? null : c*9/5+32; }
 
   function tempToF(value,uom){
@@ -862,42 +866,45 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     return Number.isFinite(v) ? v : null;
   }
 
-  function daytimeForecastFor(forecast,date){
-    const periods=forecast?.properties?.periods || [];
-    return periods.find(p=>{
-      if(!p.isDaytime) return false;
-      const x=pacificParts(new Date(p.startTime));
-      return x.date===date;
-    }) || null;
-  }
 
 
   function statusPalmTemp(v, hour){
     if(v==null) return 'unknown';
     if(hour===2){
-      if(v>75) return 'red';
-      if(v>=50 && v<=70) return 'green';
+      if(v>80) return 'red';
+      if(v<=75) return 'green';
       return 'yellow';
     }
     if(hour===8){
-      if(v>80) return 'red';
-      if(v<75) return 'green';
+      if(v>85) return 'red';
+      if(v<=80) return 'green';
       return 'yellow';
     }
     return 'unknown';
   }
-  function statusHigh(v){ if(v==null)return'unknown'; if(v>90)return'red'; if(v<=85)return'green'; return'yellow'; }
-  function statusPrecip(v){ if(v==null)return'unknown'; if(v>30)return'red'; if(v<=10)return'green'; return'yellow'; }
+  function statusPrecip(v){ if(v==null)return'unknown'; if(v>50)return'red'; if(v<=10)return'green'; return'yellow'; }
+  function statusLongPrecip(v){
+    if(v==null) return 'unknown';
+    if(v>50) return 'red';
+    if(v<=10) return 'green';
+    return 'yellow';
+  }
   function statusLongGust(v){ if(v==null)return'unknown'; if(v>35)return'red'; if(v<25)return'green'; return'yellow'; }
-  function statusPeakTemp(v){ if(v==null)return'unknown'; if(v<20)return'red'; if(v>=30&&v<=50)return'green'; return'yellow'; }
+  function statusPeakTemp(v){ if(v==null)return'unknown'; if(v<20)return'red'; if(v>=30)return'green'; return'yellow'; }
   function statusApparent(v){ if(v==null)return'unknown'; if(v<10)return'red'; if(v>25)return'green'; return'yellow'; }
   function statusWind(v){ if(v==null)return'unknown'; if(v>30)return'red'; if(v<20)return'green'; return'yellow'; }
   function statusGust(v){ if(v==null)return'unknown'; if(v>40)return'red'; if(v<30)return'green'; return'yellow'; }
   function statusThunder(v){ if(v==null)return'unknown'; if(v>=20)return'red'; if(v>=10)return'yellow'; return'green'; }
-  function statusLongTempRange(range,pop,gust){
+  function statusLongTempRange(range,gust,precipSignal){
     if(!range) return 'unknown';
-    if(range.min<30 && ((pop!=null && pop>0) || (gust!=null && gust>=25))) return 'red';
-    if(range.min>=40 && range.max<=60) return 'green';
+    if(range.min<25) return 'red';
+
+    if(range.min<30){
+      if((gust!=null && gust>=25) || precipSignal===true) return 'red';
+      if(gust==null || precipSignal==null) return 'unknown';
+    }
+
+    if(range.min>=35 && range.max<=65) return 'green';
     return 'yellow';
   }
   function statusSnowfall(v){
@@ -967,10 +974,14 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     // Documented NWS/NDFD weather-layer values relevant to this route.
     const snowTypes=new Set(['blowing_snow','snow','snow_showers']);
     const wintryTypes=new Set(['freezing_drizzle','freezing_rain','ice_crystals','sleet']);
+    const icingTypes=new Set(['freezing_drizzle','freezing_rain','sleet']);
+    const rainTypes=new Set(['drizzle','rain','rain_showers']);
 
     return {
       snow:[...phenomena].some(x=>snowTypes.has(x)),
       wintry:[...phenomena].some(x=>wintryTypes.has(x)),
+      icing:[...phenomena].some(x=>icingTypes.has(x)),
+      rain:[...phenomena].some(x=>rainTypes.has(x)),
       thunder:phenomena.has('thunderstorms'),
       complete
     };
@@ -1028,8 +1039,6 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     const p8=hourlyForExact(palm.hourly,date,8);
     const p2Temp=forecastTempF(p2);
     const p8Temp=forecastTempF(p8);
-    const pDaytime=daytimeForecastFor(palm.forecast,date);
-    const pHigh=forecastTempF(pDaytime);
 
     // For today's card, only use the remaining part of the actual C2C windows.
     const lvStart=isToday ? Math.max(10,currentHour) : 10;
@@ -1042,6 +1051,8 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     const lvGust=completeMax(lvHours.map(p=>
       speedToMph(gridValueAt(lvGustProp,new Date(p.startTime)),lvGustProp?.uom)
     ),lvExpected);
+    const lvWx=structuredWeatherFlags(lv.grid,lvHours,lvExpected);
+    const lvPrecipSignal=lvWx.complete ? (lvWx.rain || lvWx.snow || lvWx.wintry) : null;
 
     const pk13=hourlyForExact(peak.hourly,date,13);
     const pkStart=isToday ? Math.max(12,currentHour) : 12;
@@ -1075,7 +1086,11 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     ),pkExpected);
 
     const snowStart=isToday ? Math.max(10,currentHour) : 10;
+    const snowHours=(isToday && currentHour>16) ? [] : hourlyRange(peak.hourly,date,snowStart,16);
+    const snowExpected=Math.max(0,16-snowStart+1);
     const snowLevel=(isToday && currentHour>16) ? null : getSnowLevelFeet(peak,date,snowStart,16);
+    const snowPop=completeMax(snowHours.map(forecastPrecipProbability),snowExpected);
+    const snowWx=structuredWeatherFlags(peak.grid,snowHours,snowExpected);
 
     // NWS CAP event is a structured field; match exact issued heat-event names.
     const heatAlerts=alerts.filter(a=>{
@@ -1091,42 +1106,41 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     const heatAlertNames=[...new Set(heatAlerts.map(a=>a.properties?.event).filter(Boolean))];
     const hasHeat=heatAlertNames.length>0;
 
-    const longTempState=statusLongTempRange(lvTemp,lvPop,lvGust);
+    const longTempState=statusLongTempRange(lvTemp,lvGust,lvPrecipSignal);
 
     let snowState='unknown';
-    const meaningfulSnowLevelTrigger=wx.wintry || wx.snow || (pkPop!=null && pkPop>10);
-    const triggerKnown=pkPop!=null && wx.complete;
+    const relatedSnowPrecip=snowWx.wintry || snowWx.snow || (snowPop!=null && snowPop>10);
+    const snowInputsKnown=snowPop!=null && snowWx.complete;
 
-    if(!meaningfulSnowLevelTrigger && triggerKnown){
+    if(snowWx.icing && snowWx.complete){
+      snowState='red';
+    } else if(!relatedSnowPrecip && snowInputsKnown){
       snowState='green';
-    } else if(meaningfulSnowLevelTrigger && snowLevel!=null){
-      if(snowLevel<10500) snowState='red';
-      else if(snowLevel>12000) snowState='green';
-      else snowState='yellow';
+    } else if(relatedSnowPrecip && snowLevel!=null){
+      snowState=snowLevel>11500 ? 'green' : 'yellow';
     }
 
     const metrics=[
-      (isToday && currentHour>2) ? pastMetric('Palm Springs 02:00') :
+      (isToday && isPastClock(nowParts,2)) ? pastMetric('Palm Springs 02:00') :
         metric('Palm Springs 02:00', p2Temp!=null ? `${round(p2Temp)}°F` : '—', statusPalmTemp(p2Temp,2)),
-      (isToday && currentHour>8) ? pastMetric('Palm Springs 08:00') :
+      (isToday && isPastClock(nowParts,8)) ? pastMetric('Palm Springs 08:00') :
         metric('Palm Springs 08:00', p8Temp!=null ? `${round(p8Temp)}°F` : '—', statusPalmTemp(p8Temp,8)),
-      metric('Palm Springs High', pHigh!=null ? `${round(pHigh)}°F` : '—', statusHigh(pHigh)),
       metric('NWS 高温警报', hasHeat ? heatAlertNames.join(' / ') : '无', hasHeat?'red':'green'),
       (isToday && currentHour>17) ? pastMetric('Long Valley 温度','10–17时') :
         metric('Long Valley 温度',
           lvTemp ? `${round(lvTemp.min)}–${round(lvTemp.max)}°F` : '—', longTempState,
           isToday && currentHour>10 ? '剩余时段' : '10–17时'),
       (isToday && currentHour>17) ? pastMetric('Long Valley 降水概率','10–17时 · 最高小时') :
-        metric('Long Valley 降水概率', lvPop!=null ? `${round(lvPop)}%` : '—', statusPrecip(lvPop), '10–17时 · 最高小时'),
+        metric('Long Valley 降水概率', lvPop!=null ? `${round(lvPop)}%` : '—', statusLongPrecip(lvPop), '10–17时 · 最高小时'),
       (isToday && currentHour>17) ? pastMetric('Long Valley 阵风','10–17时') :
         metric('Long Valley 阵风', lvGust!=null ? `${round(lvGust)} mph` : '—', statusLongGust(lvGust), '10–17时'),
-      (isToday && currentHour>13) ? pastMetric('Peak 温度','13:00') :
+      (isToday && isPastClock(nowParts,13)) ? pastMetric('Peak 温度','13:00') :
         metric('Peak 温度', pkTemp!=null ? `${round(pkTemp)}°F` : '—', statusPeakTemp(pkTemp), '13:00'),
-      (isToday && currentHour>13) ? pastMetric('Peak 体感温度','13:00') :
+      (isToday && isPastClock(nowParts,13)) ? pastMetric('Peak 体感温度','13:00') :
         metric('Peak 体感温度',
           pkApparent!=null ? `${round(pkApparent)}°F` : '—',
           statusApparent(pkApparent), '13:00'),
-      (isToday && currentHour>13) ? pastMetric('Peak 风速','13:00') :
+      (isToday && isPastClock(nowParts,13)) ? pastMetric('Peak 风速','13:00') :
         metric('Peak 风速', pkWind!=null ? `${round(pkWind)} mph` : '—', statusWind(pkWind), '13:00'),
       (isToday && currentHour>15) ? pastMetric('Peak 阵风','12–15时') :
         metric('Peak 阵风',
@@ -1135,7 +1149,16 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
       (isToday && currentHour>15) ? pastMetric('Peak 降水概率','12–15时 · 最高小时') :
         metric('Peak 降水概率', pkPop!=null ? `${round(pkPop)}%` : '—', statusPrecip(pkPop), '12–15时 · 最高小时'),
       (isToday && currentHour>16) ? pastMetric('雪线高度') :
-        metric('雪线高度', snowLevel!=null ? `${Math.round(snowLevel/100)*100 >= 1000 ? (Math.round(snowLevel/100)*100).toLocaleString() : Math.round(snowLevel)} ft` : (snowState==='green' ? '—' : '未发布'), snowState, snowState==='green' ? '无明显降水 · 不触发' : (snowLevel!=null ? `${snowStart}–16时最低` : 'NWS 未发布')),
+        metric('雪线高度',
+          snowLevel!=null
+            ? `${(Math.round(snowLevel/100)*100).toLocaleString()} ft`
+            : (snowState==='green' ? '—' : '未发布'),
+          snowState,
+          snowWx.icing
+            ? 'NWS 明确冻雨 / 结冰信号'
+            : snowState==='green'
+              ? (relatedSnowPrecip ? '有相关降水 · 雪线 >11,500 ft' : '无相关降水 · 不触发')
+              : (snowLevel!=null ? `${snowStart}–16时最低 · 需结合 Trail Report` : 'NWS 未发布')),
       (isToday && currentHour>15) ? pastMetric('雷暴概率','12–15时 · 最高小时') :
         metric('雷暴概率',
           pkThunderProb!=null ? `${round(pkThunderProb)}%` : (wx.thunder ? '有信号' : '未发布'),
@@ -1181,6 +1204,7 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
       ['temperature_2m', new Set(['°F'])],
       ['apparent_temperature', new Set(['°F'])],
       ['precipitation_probability', new Set(['%'])],
+      ['precipitation', new Set(['inch'])],
       ['snowfall', new Set(['inch'])],
       ['wind_speed_10m', new Set(['mp/h','mph'])],
       ['wind_gusts_10m', new Set(['mp/h','mph'])]
@@ -1216,7 +1240,7 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     const params = new URLSearchParams({
       latitude:String(loc.lat),
       longitude:String(loc.lon),
-      hourly:'temperature_2m,apparent_temperature,precipitation_probability,snowfall,wind_speed_10m,wind_gusts_10m',
+      hourly:'temperature_2m,apparent_temperature,precipitation_probability,precipitation,snowfall,wind_speed_10m,wind_gusts_10m',
       temperature_unit:'fahrenheit',
       wind_speed_unit:'mph',
       precipitation_unit:'inch',
@@ -1326,12 +1350,9 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
 
   function buildTrendDay(date,palm,longValley,peak){
     const p2=omIndex(palm,date,2);
+    const p8=omIndex(palm,date,8);
     const palm2=p2>=0 && Number.isFinite(palm.hourly.temperature_2m?.[p2]) ? palm.hourly.temperature_2m[p2] : null;
-
-    // Open-Meteo daily max is documented as a simple aggregation of hourly values.
-    // Compute the max over the true Pacific local day so DST boundaries remain correct.
-    const palmDay=omLocalDayIndices(palm,date);
-    const palmHigh=omHasCompleteLocalDay(palm,date) ? omMax(palm,'temperature_2m',palmDay) : null;
+    const palm8=p8>=0 && Number.isFinite(palm.hourly.temperature_2m?.[p8]) ? palm.hourly.temperature_2m[p8] : null;
 
     const lvTempWindow=omRangeIndices(longValley,date,10,17);
     const lvPrecedingWindow=omPrecedingHourIndices(longValley,date,10,17);
@@ -1339,6 +1360,8 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     const lvTempRange=lvTemps ? {min:Math.min(...lvTemps),max:Math.max(...lvTemps)} : null;
     const lvGust=omMax(longValley,'wind_gusts_10m',lvPrecedingWindow,8);
     const lvPop=omMax(longValley,'precipitation_probability',lvPrecedingWindow,8);
+    const lvPrecip=omSum(longValley,'precipitation',lvPrecedingWindow,8);
+    const lvPrecipSignal=lvPrecip!=null ? lvPrecip>0 : null;
 
     const p13=omIndex(peak,date,13);
     const peakTemp=p13>=0 && Number.isFinite(peak.hourly.temperature_2m?.[p13])
@@ -1359,13 +1382,13 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
 
     const metrics=[
       trendMetric('Palm Springs 02:00', palm2!=null ? `${round(palm2)}°F` : '—', statusPalmTemp(palm2,2)),
-      trendMetric('Palm Springs High', palmHigh!=null ? `${round(palmHigh)}°F` : '—', statusHigh(palmHigh)),
+      trendMetric('Palm Springs 08:00', palm8!=null ? `${round(palm8)}°F` : '—', statusPalmTemp(palm8,8)),
       trendMetric(
         'Long Valley 温度',
         lvTempRange ? `${round(lvTempRange.min)}–${round(lvTempRange.max)}°F` : '—',
-        statusLongTempRange(lvTempRange,lvPop,lvGust), '10–17时'
+        statusLongTempRange(lvTempRange,lvGust,lvPrecipSignal), '10–17时'
       ),
-      trendMetric('Long Valley 降水概率', lvPop!=null ? `${round(lvPop)}%` : '—', statusPrecip(lvPop), '10–17时 · 最高小时'),
+      trendMetric('Long Valley 降水概率', lvPop!=null ? `${round(lvPop)}%` : '—', statusLongPrecip(lvPop), '10–17时 · 最高小时'),
       trendMetric('Long Valley 阵风', lvGust!=null ? `${round(lvGust)} mph` : '—', statusLongGust(lvGust), '10–17时'),
       trendMetric('Peak 温度', peakTemp!=null ? `${round(peakTemp)}°F` : '—', statusPeakTemp(peakTemp), '13:00'),
       trendMetric('Peak 体感温度', peakFeels!=null ? `${round(peakFeels)}°F` : '—', statusApparent(peakFeels), '13:00'),
