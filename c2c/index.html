@@ -81,6 +81,7 @@ th,td{padding:13px 14px;text-align:left;vertical-align:top;border-bottom:1px sol
 th{background:#ede7db;font-size:12px;letter-spacing:.03em;position:sticky;top:0}
 tr:last-child td{border-bottom:0}
 tbody tr:hover{background:#fbf8f1}
+td small{display:block;margin-top:3px;color:var(--muted);font-size:11px;line-height:1.25}
 tr.altitude{background:var(--amber2)}
 tr.altitude:hover{background:#ffedb3}
 .summit-box{margin-top:18px;background:linear-gradient(135deg,#fff4cf,#fffdf8);border:1px solid #ecd294;border-radius:20px;padding:20px}
@@ -125,7 +126,7 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
 .live-status.loading{background:#edf1ee;color:#53645d}
 .live-status.ok{background:var(--green-bg);color:var(--green)}
 .live-status.error{background:var(--red-bg);color:var(--red)}
-.forecast-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.forecast-cards{display:grid;grid-template-columns:repeat(2,minmax(420px,1fr));gap:16px}
 .forecast-day{
   background:var(--paper);border:1px solid var(--line);border-radius:22px;
   padding:18px;box-shadow:0 10px 28px rgba(27,49,42,.06)
@@ -142,11 +143,21 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
 .decision.pending{background:#edf1ee;color:#5c6963}
 .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .live-metric{
-  display:flex;justify-content:space-between;gap:10px;border-radius:11px;padding:9px 10px;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;
+  gap:14px;border-radius:12px;padding:11px 13px;min-height:60px;
   font-size:12px;background:#f5f1e8
 }
-.live-metric span:first-child{color:#66726c}
-.live-metric strong{text-align:right}
+.metric-label{
+  min-width:0;display:flex;flex-direction:column;gap:2px;word-break:keep-all;
+  color:#66726c;line-height:1.2
+}
+.metric-label>span{font-weight:650;white-space:normal}
+.metric-label small{
+  color:#8a918d;font-size:10px;line-height:1.2;font-weight:600
+}
+.live-metric strong{
+  text-align:right;white-space:nowrap;font-size:13px
+}
 .live-metric.green{background:var(--green-bg)}
 .live-metric.green strong{color:var(--green)}
 .live-metric.yellow{background:#fff2cf}
@@ -155,55 +166,13 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
 .live-metric.red strong{color:var(--red)}
 .live-metric.unknown{background:#edf1ee}
 .live-metric.unknown strong{color:#627069}
-.day-reasons{margin:13px 0 0;padding-left:18px;color:#5f6964;font-size:12px}
-.day-reasons li{margin:4px 0}
 .live-note{
   margin-top:14px;background:#f7f3e9;border:1px solid var(--line);
   border-radius:16px;padding:14px 16px;color:#59645e;font-size:12px
 }
 
-.trail-report-box{
-  background:linear-gradient(135deg,#173d33,#255648);
-  color:white;border-radius:22px;padding:18px 20px;margin:14px 0;
-  box-shadow:0 12px 30px rgba(27,49,42,.12)
-}
-.trail-report-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-.trail-report-head strong{display:block;font-size:18px;margin-top:3px}
-.trail-label{font-size:10px;letter-spacing:.14em;color:#cfe1d9;font-weight:800}
-.trail-report-summary{margin:12px 0;color:#e6f0eb;font-size:13px}
-.trail-report-box a{color:#ffd98b;font-size:12px;font-weight:800;text-decoration:none}
 
 
-.trail-metric-row{
-  margin-top:8px;
-  border-radius:12px;
-  padding:11px 12px;
-  font-size:12px;
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-  justify-content:space-between;
-}
-.trail-metric-row span{
-  color:#66726c;
-  flex:0 0 auto;
-  font-weight:700;
-}
-.trail-metric-row strong{
-  text-align:right;
-  line-height:1.45;
-}
-.trail-metric-row.green{background:var(--green-bg)}
-.trail-metric-row.green strong{color:var(--green)}
-.trail-metric-row.yellow{background:#fff2cf}
-.trail-metric-row.yellow strong{color:#94651c}
-.trail-metric-row.red{background:var(--red-bg)}
-.trail-metric-row.red strong{color:var(--red)}
-.trail-metric-row.unknown{background:#edf1ee}
-.trail-metric-row.unknown strong{color:#627069}
-
-.trail-review-grid{grid-template-columns:1fr}
-}
 
 
 .trail-inline-review{
@@ -239,7 +208,7 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
   background:#f1ede4;border-radius:12px
 }
 .trend-cards{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px
+  display:grid;grid-template-columns:repeat(2,minmax(420px,1fr));gap:16px
 }
 .trend-day{
   background:var(--paper);border:1px solid var(--line);border-radius:20px;
@@ -256,11 +225,12 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
 }
 .trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .trend-metric{
-  display:flex;justify-content:space-between;gap:10px;
-  background:#f5f1e8;border-radius:10px;padding:9px 10px;font-size:12px
+  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;
+  gap:14px;background:#f5f1e8;border-radius:12px;padding:11px 13px;
+  min-height:60px;font-size:12px
 }
-.trend-metric span{color:#68736d}
-.trend-metric strong{text-align:right}
+.trend-metric>.metric-label{color:#68736d}
+.trend-metric strong{text-align:right;white-space:nowrap;font-size:13px}
 
 .trend-metric.green{background:var(--green-bg)}
 .trend-metric.green strong{color:var(--green)}
@@ -271,16 +241,9 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
 .trend-metric.unknown{background:#edf1ee}
 .trend-metric.unknown strong{color:#627069}
 .trend-value{
-  display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;text-align:right
+  display:flex;align-items:center;justify-content:flex-end;gap:7px;
+  flex-wrap:nowrap;text-align:right;white-space:nowrap
 }
-.trend-state{
-  display:inline-block;border-radius:999px;padding:2px 6px;
-  font-size:9px;font-weight:900;letter-spacing:.04em;white-space:nowrap
-}
-.trend-state.green{background:#d3eadb;color:var(--green)}
-.trend-state.yellow{background:#f6dda1;color:#805514}
-.trend-state.red{background:#f2cbc5;color:var(--red)}
-.trend-state.unknown{background:#dfe4e1;color:#627069}
 
 
 .decision.today{
@@ -297,6 +260,21 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
   border-color:#cfc5df;
 }
 
+
+#metrics table{
+  table-layout:fixed;
+  min-width:900px;
+}
+#metrics th:nth-child(1),#metrics td:nth-child(1){width:21%}
+#metrics th:nth-child(2),#metrics td:nth-child(2){width:18%}
+#metrics th:nth-child(3),#metrics td:nth-child(3){width:22%}
+#metrics th:nth-child(4),#metrics td:nth-child(4){width:39%}
+#metrics td{line-height:1.4}
+
+@media(max-width:980px){
+  .forecast-cards,.trend-cards{grid-template-columns:1fr}
+}
+
 @media(max-width:760px){
   .forecast-subhead{display:block}
   .forecast-subhead>div{margin-bottom:5px}
@@ -305,10 +283,6 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
   .trend-grid{grid-template-columns:1fr}
 }
 
-@media(max-width:760px){
-  .trail-metric-row{display:block}
-  .trail-metric-row strong{display:block;text-align:left;margin-top:4px}
-}
 
 @media(max-width:760px){
   .forecast-cards{grid-template-columns:1fr}
@@ -533,25 +507,31 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
       <div><div class="kicker">Go / No-Go</div><h2>Go/No-Go Metrics</h2></div>
       <div>从出发那周周一开始观测</div>
     </div>
+    <div class="live-note" style="margin:0 0 14px">
+      下面的 GO / REVIEW / NO-GO 是本页面的<strong>明确数值规则</strong>，不是 NWS / Open‑Meteo 官方风险等级；天气数值本身直接来自结构化 API 字段或对这些字段做 min / max / sum 聚合。
+    </div>
     <div class="table-wrap">
       <table style="min-width:860px">
         <thead><tr><th>指标</th><th>GO</th><th>REVIEW / CAUTION</th><th>NO-GO</th></tr></thead>
-        <tbody><tr><td>Palm Springs 02:00温度</td><td class="go">50–70°F</td><td class="review-cell">&lt;50°F 或 70–75°F</td><td class="nogo">&gt;75°F</td></tr>
+        <tbody><tr><td>Palm Springs 02:00温度</td><td class="go">50–70°F</td><td class="review-cell">&lt;50°F 或 &gt;70–75°F</td><td class="nogo">&gt;75°F</td></tr>
 <tr><td>Palm Springs 08:00温度</td><td class="go">&lt;75°F</td><td class="review-cell">75–80°F</td><td class="nogo">&gt;80°F</td></tr>
 <tr><td>Palm Springs 当天最高</td><td class="go">≤85°F</td><td class="review-cell">86–90°F</td><td class="nogo">&gt;90°F</td></tr>
-<tr><td>Heat Advisory</td><td class="go">No</td><td class="review-cell">—</td><td class="nogo">Yes</td></tr>
-<tr><td>Long Valley 白天温度</td><td class="go">40–60°F</td><td class="review-cell">30–40°F / 60–65°F</td><td class="nogo">&lt;30°F 且有风/降水</td></tr>
-<tr><td>Long Valley 降水概率</td><td class="go">0–10%</td><td class="review-cell">10–30%</td><td class="nogo">&gt;30%，尤其有雷暴/雪</td></tr>
-<tr><td>Long Valley Gust</td><td class="go">&lt;25 mph</td><td class="review-cell">25–35 mph</td><td class="nogo">&gt;35–40 mph</td></tr>
-<tr><td>Peak 13:00温度</td><td class="go">30–50°F</td><td class="review-cell">20–30°F</td><td class="nogo">&lt;20°F</td></tr>
-<tr><td>Peak Wind Chill</td><td class="go">&gt;25°F</td><td class="review-cell">10–25°F</td><td class="nogo">&lt;10°F</td></tr>
-<tr><td>Peak sustained wind</td><td class="go">&lt;20 mph</td><td class="review-cell">20–30 mph</td><td class="nogo">&gt;30 mph</td></tr>
-<tr><td>Peak Gust</td><td class="go">&lt;30 mph</td><td class="review-cell">30–40 mph</td><td class="nogo">&gt;40 mph</td></tr>
-<tr><td>Peak 降水概率 12–15时</td><td class="go">0–10%</td><td class="review-cell">11–30%</td><td class="nogo">&gt;30%</td></tr>
-<tr><td>Snow level</td><td class="go">无明显降水，或触发时 &gt;12,000 ft</td><td class="review-cell">触发时 10,500–12,000 ft</td><td class="nogo">触发时 &lt;10,500 ft</td></tr>
-<tr><td>Thunderstorm</td><td class="go">&lt;10%</td><td class="review-cell">10–19%</td><td class="nogo">≥20%</td></tr>
+<tr><td>NWS 高温警报</td><td class="go">No</td><td class="review-cell">—</td><td class="nogo">Yes</td></tr>
+<tr><td>Long Valley 温度<br><small>10–17时</small></td><td class="go">整个区间 40–60°F</td><td class="review-cell">超出 40–60°F，且未触发 NO-GO</td><td class="nogo">最低 &lt;30°F 且降水概率 &gt;0% 或阵风 ≥25 mph</td></tr>
+<tr><td>Long Valley 降水概率<br><small>10–17时 · 最高小时</small></td><td class="go">≤10%</td><td class="review-cell">&gt;10–30%</td><td class="nogo">&gt;30%</td></tr>
+<tr><td>Long Valley 阵风<br><small>10–17时</small></td><td class="go">&lt;25 mph</td><td class="review-cell">25–35 mph</td><td class="nogo">&gt;35 mph</td></tr>
+<tr><td>Peak 温度<br><small>13:00</small></td><td class="go">30–50°F</td><td class="review-cell">20–&lt;30°F 或 &gt;50°F</td><td class="nogo">&lt;20°F</td></tr>
+<tr><td>Peak 体感温度<br><small>13:00</small></td><td class="go">&gt;25°F</td><td class="review-cell">10–25°F</td><td class="nogo">&lt;10°F</td></tr>
+<tr><td>Peak 风速<br><small>13:00</small></td><td class="go">&lt;20 mph</td><td class="review-cell">20–30 mph</td><td class="nogo">&gt;30 mph</td></tr>
+<tr><td>Peak 阵风<br><small>12–15时</small></td><td class="go">&lt;30 mph</td><td class="review-cell">30–40 mph</td><td class="nogo">&gt;40 mph</td></tr>
+<tr><td>Peak 降水概率<br><small>12–15时 · 最高小时</small></td><td class="go">≤10%</td><td class="review-cell">&gt;10–30%</td><td class="nogo">&gt;30%</td></tr>
+<tr><td>雪线高度</td><td class="go">未触发，或触发时 &gt;12,000 ft</td><td class="review-cell">触发时 10,500–12,000 ft</td><td class="nogo">触发时 &lt;10,500 ft</td></tr>
+<tr><td>雷暴概率<br><small>12–15时 · 最高小时</small></td><td class="go">&lt;10%</td><td class="review-cell">10–19%</td><td class="nogo">≥20%<br><small>若概率字段未发布，但 NWS weather grid 明确为 thunderstorms，也按 NO-GO</small></td></tr>
 <tr><td>Trail Report（人工查看）</td><td class="go">无 ice / spikes requirement</td><td class="review-cell">少量残雪 / 薄冰，路线可避开</td><td class="nogo">icy / microspikes recommended</td></tr></tbody>
       </table>
+    </div>
+    <div class="live-note" style="margin-top:12px">
+      <strong>雪线触发条件：</strong>Peak 降水概率 &gt;10%，或 NWS weather grid 明确出现 snow / freezing rain / freezing drizzle / sleet / ice crystals。
     </div>
   </div>
 </section>
@@ -593,16 +573,16 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
         <span class="forecast-source trend-source">LONG RANGE</span>
         <h3>趋势预览</h3>
       </div>
-      <small>NWS 正式区最后一天之后 · Open-Meteo 长期模型 · 每项显示所属阈值区间 · 不做整天的正式结论。</small>
+      <small>NWS 正式区最后一天之后 · Open-Meteo 长期模型 · 仅保留颜色提示 · 不显示 GO / REVIEW / NO-GO · 不做整天正式结论。</small>
     </div>
 
     <div id="trendStatus" class="trend-status">等待长期趋势数据…</div>
     <div id="trendCards" class="trend-cards"></div>
 
     <div class="live-note">
-      <strong>正式判断：</strong> 使用 NWS 数据：Palm Springs 02:00 / 08:00 / NWS daytime high、Heat Advisory；Long Valley 白天温度 / 降水概率 / gust；Peak 13:00 温度 / wind chill / sustained wind / gust / 12–15时降水概率 / snow level / thunderstorm。Gust、wind chill、snow level、thunder probability 优先读取 NWS raw grid 结构化字段；缺失值不再按 0 处理。<br>
-      <strong>趋势预览：</strong> NWS 正式区之后使用 Open‑Meteo 做趋势预览：Palm Springs 02:00 / High、Long Valley 10–17 时温度与 Gust、Peak 13:00 温度 / 体感 / sustained wind、Peak 午后 Gust / 降水概率 / Snowfall。每个 metric 会按阈值标出 GO / REVIEW / NO-GO 区间，但不会汇总成当天的最终结论。<br>
-      <strong>Trail Report：</strong> 不参与自动判断；请用上方天气监测链接人工查看最新报告。
+      <strong>正式判断：</strong> 仅使用 NWS JSON 的结构化字段：hourly / forecast / raw grid / active alerts。Palm Springs 02:00 / 08:00、daytime high；Long Valley 10–17 时温度 / 降水概率 / 阵风；Peak 13:00 温度 / 体感温度 / 风速、12–15 时阵风 / 降水概率 / 雷暴概率，以及 raw-grid snowLevel。雷暴优先用 probabilityOfThunder；若该字段未发布，则只参考同一 raw-grid weather 是否明确出现 thunderstorm。Peak 体感温度直接读取 NWS raw-grid apparentTemperature（NWS 定义为 heat index 或 wind chill）；Peak 风速直接读取 raw-grid windSpeed（maximum prevailing wind speed）。天气文字不做正则解析；任一要求完整窗口的小时数据缺失时，该指标直接显示未知，不用残缺数据计算。<br>
+      <strong>趋势预览：</strong> 仅使用 Open‑Meteo JSON 结构化字段。请求采用 Unix/UTC 时间戳，再由浏览器转换成 America/Los_Angeles，以正确处理 11 月 DST；降水概率、降雪量、阵风按官方“preceding hour”定义对齐路线时间窗口；任何窗口只要缺一个小时就显示未知，不用残缺数据做 max/sum。每项仅按阈值使用底色提示，不显示 GO / REVIEW / NO-GO 文本，也不汇总成当天最终结论。降雪量趋势规则：≤0.01 in = GO，&gt;0.01–0.50 in = REVIEW，&gt;0.50 in = NO-GO（这是本页面自定义趋势阈值，不是 Open‑Meteo 官方等级）。页面显示的 降水概率 是指定窗口内“最高单小时 降水概率”，不是整个窗口至少发生一次降水的联合概率。Open‑Meteo 的 降水概率 来自 ensemble 模型，文档注明其基础分辨率约 0.25°（~27 km），因此 Peak 降水概率 只是远期趋势信号。<br>
+      <strong>Trail Report：</strong> 仅人工查看；页面不再包含 Trail Report 自动 NLP / 正则判定代码。
     </div>
   </div>
 </section>
@@ -753,22 +733,14 @@ button{border:0;border-radius:999px;padding:10px 14px;font-weight:800;cursor:poi
     peak: {name:'San Jacinto Peak', lat:33.814463, lon:-116.6791834, elevation:3302}
   };
 
-  // If the Trail Report website blocks a direct browser request, this current
-  // report snapshot is used as a fallback. Refreshing the HTML later can update it.
-  const TRAIL_FALLBACK = {
-    title: 'Weather and water update 7th October 2026',
-    date: '2026-10-07',
-    url: 'https://sanjacjon.com/',
-    text: `Forecasts are increasingly confident that there will be noteworthy precipitation and a dramatic cooling on 10th-13th October, coinciding with the holiday weekend. Rainfall at mid elevations may exceed one inch, largely falling on 11th but continuing to drizzle on 12th-13th.
-Windchills well below freezing, moderate rain, and even a dusting of snow (1-3 inches) above 9000 ft, are currently tentatively forecast for the high country on 11th-13th October.
-The conditions on 11th-13th October are tentatively forecast to be similar to those of last winter which resulted in multiple significant hypothermia cases in the San Jacinto high country. Hikers may well be ascending through rain, before encountering strong winds, frigid windchills, and possible snowfall at the highest elevations.
-Being fully prepared for wet weather and winter conditions will be critical. A clear understanding that turning around may well be the safest option is invaluable.
-TRAIL CONDITIONS
-Current water conditions are summarized in the introduction above.
-The first comprehensive trail trimming in decades is being undertaken by the Trail Report this year on the upper Peak Trail. About 90% of the 0.5 mile section of trail between 10,000 ft and the Miller Peak switchback had been widened to 2-4 feet by early October.
-Unmanaged chinquapin overgrowth had narrowed the trail to just 10-15 inches wide in many places, which was problematic year-round for pole users but especially in winter conditions.
-Deer Springs Trail from the trailhead to Little Round Valley was cleared of the handful of blowdowns from last winter by the Trail Report.`
-  };
+  const HEAT_EVENTS=new Set([
+    'Heat Advisory',
+    'Extreme Heat Watch',
+    'Extreme Heat Warning',
+    'Excessive Heat Watch',
+    'Excessive Heat Warning'
+  ]);
+
 
   const $ = s => document.querySelector(s);
   const cards = $('#forecastCards');
@@ -789,26 +761,17 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
     };
   }
 
-  function todayDate(){
-    return pacificParts(new Date()).date;
+
+  function calendarDateOffset(days){
+    const p=pacificParts(new Date());
+    const d=new Date(Date.UTC(p.year,p.month-1,p.day+days,12,0,0));
+    return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}-${String(d.getUTCDate()).padStart(2,'0')}`;
   }
 
-  // Today + the next N calendar days.
+  // Today + the next N Pacific calendar dates, without 24-hour/DST drift.
   function formalDatesFromToday(nFuture=7){
-    const now = new Date();
-    const arr=[pacificParts(now).date];
-    for(let i=1;i<=nFuture;i++){
-      arr.push(pacificParts(new Date(now.getTime()+i*86400000)).date);
-    }
-    return [...new Set(arr)];
-  }
-
-  function nextDates(n=7){
-    const now = new Date();
     const arr=[];
-    for(let i=1;i<=n;i++){
-      arr.push(pacificParts(new Date(now.getTime()+i*86400000)).date);
-    }
+    for(let i=0;i<=nFuture;i++) arr.push(calendarDateOffset(i));
     return arr;
   }
 
@@ -816,34 +779,36 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
 
   function tempToF(value,uom){
     if(value==null || !Number.isFinite(value)) return null;
-    const unit=String(uom||'').toLowerCase();
-    if(unit.includes('degf') || unit.includes('fahrenheit')) return value;
-    if(unit.includes('degc') || unit.includes('celsius')) return cToF(value);
-    return null;
+    switch(String(uom||'')){
+      case 'wmoUnit:degF': return value;
+      case 'wmoUnit:degC': return cToF(value);
+      default: return null;
+    }
   }
 
   function speedToMph(value,uom){
     if(value==null || !Number.isFinite(value)) return null;
-    const unit=String(uom||'').toLowerCase();
-    if(unit.includes('mi_h') || unit.includes('mph')) return value;
-    if(unit.includes('km_h') || unit.includes('km/h') || unit.includes('kph')) return value*0.621371;
-    if(unit.includes('m_s') || unit.includes('m/s')) return value*2.23694;
-    if(unit.includes('kt') || unit.includes('knot')) return value*1.15078;
-    return null;
+    switch(String(uom||'')){
+      case 'wmoUnit:mi_h-1': return value;
+      case 'wmoUnit:km_h-1': return value*0.621371;
+      case 'wmoUnit:m_s-1': return value*2.23694;
+      case 'wmoUnit:kt': return value*1.15078;
+      default: return null;
+    }
   }
 
-  function maxFinite(values){
-    const vals=values.filter(v=>v!=null && Number.isFinite(v));
-    return vals.length ? Math.max(...vals) : null;
+  function completeFinite(values,expectedCount=null){
+    if(expectedCount!=null && values.length!==expectedCount) return null;
+    return values.length && values.every(Number.isFinite) ? values : null;
+  }
+
+  function completeMax(values,expectedCount=null){
+    const vals=completeFinite(values,expectedCount);
+    return vals ? Math.max(...vals) : null;
   }
 
   function round(v){ return v==null || Number.isNaN(v) ? null : Math.round(v); }
 
-  function maxWindText(s){
-    if(!s) return null;
-    const nums=[...String(s).matchAll(/(\d+(?:\.\d+)?)/g)].map(x=>+x[1]);
-    return nums.length ? Math.max(...nums) : null;
-  }
 
   function isoDurationMs(s){
     const m=String(s||'').match(/^P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?$/);
@@ -862,16 +827,12 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
     return null;
   }
 
-  function hourlyFor(data,date,hour){
+  function hourlyForExact(data,date,hour){
     const periods=data?.properties?.periods || [];
-    let best=null, bestDiff=1e9;
-    for(const p of periods){
+    return periods.find(p=>{
       const parts=pacificParts(new Date(p.startTime));
-      if(parts.date!==date) continue;
-      const diff=Math.abs(parts.hour-hour);
-      if(diff<bestDiff){best=p;bestDiff=diff;}
-    }
-    return bestDiff<=1 ? best : null;
+      return parts.date===date && parts.hour===hour;
+    }) || null;
   }
 
   function hourlyRange(data,date,startHour,endHour){
@@ -879,6 +840,26 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
       const x=pacificParts(new Date(p.startTime));
       return x.date===date && x.hour>=startHour && x.hour<=endHour;
     });
+  }
+
+  function forecastTempF(period){
+    const v=period?.temperature;
+    if(!Number.isFinite(v)) return null;
+    if(period.temperatureUnit==='F') return v;
+    if(period.temperatureUnit==='C') return cToF(v);
+    return null;
+  }
+
+  function forecastPrecipProbability(period){
+    const q=period?.probabilityOfPrecipitation;
+    if(q?.unitCode!=='wmoUnit:percent' || !Number.isFinite(q.value)) return null;
+    return q.value;
+  }
+
+  function gridPercentAt(prop,when){
+    if(prop?.uom!=='wmoUnit:percent') return null;
+    const v=gridValueAt(prop,when);
+    return Number.isFinite(v) ? v : null;
   }
 
   function daytimeForecastFor(forecast,date){
@@ -909,7 +890,7 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
   function statusPrecip(v){ if(v==null)return'unknown'; if(v>30)return'red'; if(v<=10)return'green'; return'yellow'; }
   function statusLongGust(v){ if(v==null)return'unknown'; if(v>35)return'red'; if(v<25)return'green'; return'yellow'; }
   function statusPeakTemp(v){ if(v==null)return'unknown'; if(v<20)return'red'; if(v>=30&&v<=50)return'green'; return'yellow'; }
-  function statusChill(v){ if(v==null)return'unknown'; if(v<10)return'red'; if(v>25)return'green'; return'yellow'; }
+  function statusApparent(v){ if(v==null)return'unknown'; if(v<10)return'red'; if(v>25)return'green'; return'yellow'; }
   function statusWind(v){ if(v==null)return'unknown'; if(v>30)return'red'; if(v<20)return'green'; return'yellow'; }
   function statusGust(v){ if(v==null)return'unknown'; if(v>40)return'red'; if(v<30)return'green'; return'yellow'; }
   function statusThunder(v){ if(v==null)return'unknown'; if(v>=20)return'red'; if(v>=10)return'yellow'; return'green'; }
@@ -932,241 +913,17 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
     return `${v<1 ? v.toFixed(2) : v.toFixed(1)} in`;
   }
 
-  function metric(label,value,state){ return {label,value,state}; }
-  function pastMetric(label){ return {label,value:'已过',state:'past'}; }
+  function metric(label,value,state,detail=''){ return {label,value,state,detail}; }
+  function pastMetric(label,detail=''){ return {label,value:'已过',state:'past',detail}; }
 
-  function stripHtml(s){
-    const d=document.createElement('div');
-    d.innerHTML=s||'';
-    return (d.textContent||d.innerText||'').replace(/\s+/g,' ').trim();
-  }
-
-  async function getTrailReport(){
-    // WordPress.com public API is the preferred live source.
-    try{
-      const u='https://public-api.wordpress.com/rest/v1.1/sites/sanjacjon.com/posts/?number=1';
-      const r=await fetch(u);
-      if(!r.ok) throw new Error('Trail API '+r.status);
-      const j=await r.json();
-      const p=j.posts?.[0];
-      if(!p) throw new Error('No trail post');
-      return {
-        title:stripHtml(p.title),
-        date:(p.date||'').slice(0,10),
-        url:p.URL||'https://sanjacjon.com/',
-        text:stripHtml(p.content)
-      };
-    }catch(e){
-      console.warn('Live Trail Report unavailable; using embedded current snapshot.',e);
-      return {...TRAIL_FALLBACK, fallback:true};
-    }
-  }
-
-  const MONTHS={
-    january:1,february:2,march:3,april:4,may:5,june:6,
-    july:7,august:8,september:9,october:10,november:11,december:12
-  };
-
-  function dateKey(y,m,d){
-    return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-  }
-
-
-  function sentenceList(text){
-    return String(text||'')
-      .replace(/\s+/g,' ')
-      .split(/(?<=[.!?])\s+|(?:\s*[•·]\s*)/)
-      .map(s=>s.trim())
-      .filter(Boolean);
-  }
-
-  function routeRelevantSentence(s){
-    const x=s.toLowerCase();
-
-    // C2C / summit-route terms.
-    const target=/\bpeak trail\b|\bwellman\b|\bround valley\b|\blong valley\b|\bskyline\b|\bsan jacinto peak\b|\bsummit\b|\bhigh country\b|\bupper peak trail\b/;
-    if(target.test(x)) return true;
-
-    // Generic current trail statements are useful if they don't name an unrelated route.
-    const generic=/\btrails?\b|\btrail conditions?\b|\babove\s+\d{4,5}\s*ft\b|\babove\s+\d{4,5}\s*feet\b/;
-    const otherRoute=/south ridge|devil'?s slide|marion mountain|seven pines|deer springs|spitler peak|palm canyon|pacific crest trail|\bpct\b/;
-    return generic.test(x) && !otherRoute.test(x);
-  }
-
-  function isHistoricalSentence(s){
-    const x=s.toLowerCase();
-    // Historical references should not override an explicit current state.
-    return /\b(?:yesterday|last week|last month|two weeks ago|a week ago|previously|earlier this month|earlier in the season|had been|used to be|before the storm)\b/.test(x)
-      && !/\b(?:now|currently|today|at present|as of|remains?|still)\b/.test(x);
-  }
-
-  function snowPercent(s){
-    const vals=[...String(s).matchAll(/(\d{1,3})\s*%\s*(?:snow|ice|cover|covered)/ig)].map(m=>+m[1]);
-    const vals2=[...String(s).matchAll(/(?:snow|ice)\s*(?:cover|covered)?[^.]{0,35}?(\d{1,3})\s*%/ig)].map(m=>+m[1]);
-    const all=[...vals,...vals2].filter(v=>v>=0&&v<=100);
-    return all.length ? Math.max(...all) : null;
-  }
-
-  function conditionDateFromSentence(s, reportDate){
-    const rp=String(reportDate||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    if(!rp) return null;
-    const year=+rp[1], reportMonth=+rp[2];
-    const m=String(s||'').match(/\b(?:on|as of|surveyed)\s+(?:(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+)?(\d{1,2})(?:st|nd|rd|th)?(?:\s+(January|February|March|April|May|June|July|August|September|October|November|December))?/i);
-    if(!m) return null;
-    const month=m[2] ? MONTHS[m[2].toLowerCase()] : reportMonth;
-    return dateKey(year,month,+m[1]);
-  }
-
-  function hasCurrentMarker(s, reportDate){
-    const x=String(s||'').toLowerCase();
-    if(/\b(?:currently|at this time|now|today|still|remains?|as of)\b/.test(x)) return true;
-    const rp=String(reportDate||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    if(!rp) return false;
-    const day=+rp[3];
-    return new RegExp(`\\b${day}(?:st|nd|rd|th)?\\b`).test(x);
-  }
-
-  function sentenceSeverity(s){
-    const x=s.toLowerCase();
-    const pct=snowPercent(s);
-    const negTraction=/\b(?:microspikes?|spikes?)\b[^.]{0,45}\b(?:not required|no longer required|unnecessary|not needed)\b|\b(?:not required|no longer required|unnecessary|not needed)\b[^.]{0,45}\b(?:microspikes?|spikes?)\b/.test(x);
-    const tractionRecommended=!negTraction && /\b(?:microspikes?|spikes?)\b[^.]{0,55}\b(?:recommended|strongly recommended|advised|essential|required)\b/.test(x);
-    const tractionUseful=!negTraction && /\b(?:microspikes?|spikes?)\b[^.]{0,55}\b(?:useful|helpful|valuable)\b/.test(x);
-    const severeObjective=/\b(?:icy conditions?|continuous (?:snow|ice)|continuous icy snow|significant snow|deep snow|substantial snow|snow-covered|snow covered|hard ice|sheet ice|route (?:is )?obscured|trail (?:is )?obscured|obscured by (?:snow|ice))\b/.test(x) || /\b(?:snow|ice)\b[^.]{0,45}\b(?:covers?|covering)\b[^.]{0,30}\b(?:most|majority|nearly all|almost all)\b/.test(x) || (pct!=null && pct>=30);
-    const summitIce=/(?:peak trail|wellman|san jacinto peak|summit|high country)[^.]{0,180}\b(?:icy|ice|snow cover|snow-covered|snow covered)\b/.test(x);
-    const mild=/\b(?:small patches? of snow|minor patches? of snow|isolated patches? of snow|tiny patches? of snow|tiny icy patches?|thin icy patches?|very thin icy snow|thin ice|limited snow cover|patchy snow|patches? of snow|residual snow|remnant snow)\b/.test(x) || (pct!=null && pct>0 && pct<=20);
-    const avoidable=/\b(?:easily avoidable|readily avoidable|can be avoided|easy to avoid|mostly avoidable|pose no hazards?|posing any significant hazard)\b/.test(x);
-    const explicitClear=/\b(?:trails? (?:are )?clear of snow|functionally clear of snow|snow[- ]free|clear of ice|no snow on (?:the )?(?:peak trail|wellman|route)|no ice on (?:the )?(?:peak trail|wellman|route))\b/.test(x);
-    if(severeObjective || tractionRecommended || (summitIce && !mild) || (tractionUseful && (pct==null || pct>=30 || /\b(?:icy|ice)\b/.test(x)))) return {state:'red', reason:s.trim()};
-    if(mild && /\b(?:icy|ice)\b/.test(x)) return {state:'yellow', reason:s.trim()};
-    if(mild && negTraction && (avoidable || (pct!=null && pct<=10))) return {state:'green', reason:s.trim()};
-    if(mild || tractionUseful) return {state:'yellow', reason:s.trim()};
-    if(explicitClear || negTraction) return {state:'green', reason:s.trim()};
-    return {state:'unknown', reason:s.trim()};
-  }
-
-  function parseFutureTrailWindows(reportText, reportDate){
-    const text=String(reportText||'').replace(/\s+/g,' ');
-    const reportYear=+(reportDate||'').slice(0,4) || pacificParts(new Date()).year;
-    const windows=[];
-
-    const patterns=[
-      // 11th-14th October / 11 to 14 October / 11 through 14 October
-      /(\d{1,2})(?:st|nd|rd|th)?\s*(?:[-–—]|to|through)\s*(\d{1,2})(?:st|nd|rd|th)?\s+(January|February|March|April|May|June|July|August|September|October|November|December)/ig,
-      // October 11-14
-      /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:st|nd|rd|th)?\s*(?:[-–—]|to|through)\s*(\d{1,2})(?:st|nd|rd|th)?/ig
-    ];
-
-    for(const [pi,rex] of patterns.entries()){
-      let m;
-      while((m=rex.exec(text))){
-        let start,end,monthName;
-        if(pi===0){ start=+m[1]; end=+m[2]; monthName=m[3]; }
-        else { monthName=m[1]; start=+m[2]; end=+m[3]; }
-
-        const mon=MONTHS[monthName.toLowerCase()];
-        const before=Math.max(0,m.index-300), after=Math.min(text.length,m.index+m[0].length+650);
-        const ctx=text.slice(before,after);
-        const lc=ctx.toLowerCase();
-
-        const isForecast=/forecast|expected|possibility|possible|chance|likely|tentative|increasing|will be|may |could |anticipated|predicted/.test(lc);
-        if(!isForecast) continue;
-
-        const severe=
-          /hypothermia|well below freezing|below freezing|strong winds?|gale|moderate precipitation|heavy rain|significant snow|snowfall|dusting of snow|snow .*above|winter conditions?|icy conditions?|freezing rain|microspikes?|spikes recommended/.test(lc);
-        const caution=
-          /light snow|rain|showers?|cooling|windchill|breez|precipitation|cold front|storm/.test(lc);
-
-        const state=severe?'red':caution?'yellow':null;
-        if(!state) continue;
-
-        const snippets=[];
-        if(/snow/.test(lc)) snippets.push('snow');
-        if(/ice|icy|freezing rain/.test(lc)) snippets.push('ice');
-        if(/freezing|windchill/.test(lc)) snippets.push('freezing wind chill');
-        if(/strong winds?|gale/.test(lc)) snippets.push('strong wind');
-        if(/rain|precipitation|showers?/.test(lc)) snippets.push('rain / precipitation');
-        if(/hypothermia/.test(lc)) snippets.push('hypothermia risk');
-
-        for(let d=start; d<=end; d++){
-          windows.push({
-            date:dateKey(reportYear,mon,d),
-            state,
-            label:`Trail Report: ${start}–${end} ${monthName} · ${[...new Set(snippets)].join(' / ')}`
-          });
-        }
-      }
-    }
-    return windows;
-  }
-
-  function currentTrailState(report){
-    const raw=String(report.text||'');
-    const lower=raw.toLowerCase();
-    const trailIdx=lower.lastIndexOf('trail conditions');
-    const intro=trailIdx>=0 ? raw.slice(0,trailIdx) : '';
-    const scoped=trailIdx>=0 ? raw.slice(trailIdx+'trail conditions'.length) : raw;
-
-    const trailSentences=sentenceList(scoped).filter(routeRelevantSentence).filter(s=>!isHistoricalSentence(s));
-    const assessedTrail=trailSentences.map(s=>({s,date:conditionDateFromSentence(s,report.date),sev:sentenceSeverity(s)}));
-    const dated=assessedTrail.filter(x=>x.date && x.sev.state!=='unknown');
-    const latestDate=dated.length ? dated.map(x=>x.date).sort().slice(-1)[0] : null;
-    const candidates=assessedTrail.filter(x=>x.sev.state!=='unknown' && (!x.date || x.date===latestDate));
-
-    const introCandidates=sentenceList(intro)
-      .filter(routeRelevantSentence)
-      .filter(s=>hasCurrentMarker(s,report.date))
-      .filter(s=>!/\b(?:forecast|forecasted|expected|tentatively|possible|possibility|chance|likely|may|could|will)\b/i.test(s))
-      .map(s=>({s,date:conditionDateFromSentence(s,report.date),sev:sentenceSeverity(s)}))
-      .filter(x=>x.sev.state!=='unknown');
-    candidates.push(...introCandidates);
-
-    if(candidates.some(x=>x.sev.state==='red')) return {state:'red',label:'当前 C2C / Peak 路线存在明显积雪、结冰或 traction 警告'};
-    if(candidates.some(x=>x.sev.state==='yellow')) return {state:'yellow',label:'当前 C2C / Peak 路线有少量残雪 / 薄冰，需谨慎评估'};
-    if(candidates.some(x=>x.sev.state==='green')) return {state:'green',label:'Trail Report 显示 C2C / Peak 路线无明显雪冰或不需要 spikes'};
-
-    const ageDays=Math.abs((Date.now()-new Date(report.date+'T12:00:00-07:00').getTime())/86400000);
-    if(ageDays<=7) return {state:'green',label:'最新 Trail Conditions 未发现 C2C / Peak 路线当前冰雪 / traction 警告'};
-    return {state:'unknown',label:'Trail Report 较旧，无法可靠判定当前雪冰'};
-  }
-
-  function trailForDate(report,date){
-    const base=currentTrailState(report);
-    const windows=parseFutureTrailWindows(report.text,report.date);
-    const hit=windows.filter(w=>w.date===date);
-
-    if(hit.length){
-      // Future dated hazards override current dry/clear trail conditions.
-      const red=hit.find(w=>w.state==='red');
-      if(red) return red;
-      const yellow=hit.find(w=>w.state==='yellow');
-      if(yellow && base.state!=='red') return yellow;
-    }
-    return base;
-  }
-
-  function snowLevelTextFallback(forecast,date){
-    const periods=forecast?.properties?.periods || [];
-    const dayPeriods=periods.filter(p=>pacificParts(new Date(p.startTime)).date===date);
-    const text=dayPeriods.map(p=>`${p.shortForecast||''} ${p.detailedForecast||''}`).join(' ');
-    const patterns=[
-      /snow level(?:\s+\w+)*?\s+(?:to\s+)?([\d,]+)\s*(?:feet|ft)/ig,
-      /snow level(?:\s+\w+)*?\s+(?:around|near|above|below)\s+([\d,]+)\s*(?:feet|ft)/ig
-    ];
-    const values=[];
-    for(const re of patterns){
-      for(const m of text.matchAll(re)) values.push(+m[1].replace(/,/g,''));
-    }
-    return values.length ? Math.min(...values) : null;
-  }
 
   function snowLevelValueToFeet(value,uom){
     if(value==null || !Number.isFinite(value)) return null;
-    const unit=String(uom||'').toLowerCase();
-    if(unit.includes('ft') || unit.includes('foot')) return value;
-    // NWS forecastGridData snowLevel is normally expressed in meters.
-    if(unit.includes('m')) return value*3.28084;
-    return null;
+    switch(String(uom||'')){
+      case 'wmoUnit:ft': return value;
+      case 'wmoUnit:m': return value*3.28084;
+      default: return null;
+    }
   }
 
   function snowLevelFromGrid(grid,hourly,date,startHour=10,endHour=16){
@@ -1174,59 +931,91 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
     if(!prop?.values?.length) return null;
 
     const hours=hourlyRange(hourly,date,startHour,endHour);
-    const values=[];
-    for(const p of hours){
+    const expected=Math.max(0,endHour-startHour+1);
+    if(hours.length!==expected) return null;
+
+    const values=hours.map(p=>{
       const raw=gridValueAt(prop,new Date(p.startTime));
       const feet=snowLevelValueToFeet(raw,prop.uom);
-      if(feet!=null && feet>0) values.push(feet);
-    }
-
-    if(!values.length) return null;
+      return feet!=null && feet>0 ? feet : null;
+    });
+    if(!values.every(Number.isFinite)) return null;
     return Math.min(...values);
   }
 
   function getSnowLevelFeet(peak,date,startHour=10,endHour=16){
-    const gridValue=snowLevelFromGrid(peak.grid,peak.hourly,date,startHour,endHour);
-    if(gridValue!=null) return {value:gridValue,source:'grid'};
-    const textValue=snowLevelTextFallback(peak.forecast,date);
-    if(textValue!=null) return {value:textValue,source:'text'};
-    return null;
+    return snowLevelFromGrid(peak.grid,peak.hourly,date,startHour,endHour);
   }
 
-  function detectWx(hours){
-    const text=hours.map(p=>`${p.shortForecast||''} ${p.detailedForecast||''}`).join(' ').toLowerCase();
+  function structuredWeatherFlags(grid,hours,expectedCount){
+    const prop=grid?.properties?.weather;
+    const phenomena=new Set();
+    let complete=hours.length===expectedCount && expectedCount>0;
+
+    for(const p of hours){
+      const items=gridValueAt(prop,new Date(p.startTime));
+      if(!Array.isArray(items)){
+        complete=false;
+        continue;
+      }
+      for(const item of items){
+        if(typeof item?.weather!=='string' || !item.weather) continue;
+        phenomena.add(item.weather.trim().toLowerCase());
+      }
+    }
+
+    // Documented NWS/NDFD weather-layer values relevant to this route.
+    const snowTypes=new Set(['blowing_snow','snow','snow_showers']);
+    const wintryTypes=new Set(['freezing_drizzle','freezing_rain','ice_crystals','sleet']);
+
     return {
-      thunder:/thunder/.test(text),
-      wintry:/freezing rain|sleet|ice pellets/.test(text),
-      snow:/snow/.test(text),
-      rain:/rain|shower/.test(text)
+      snow:[...phenomena].some(x=>snowTypes.has(x)),
+      wintry:[...phenomena].some(x=>wintryTypes.has(x)),
+      thunder:phenomena.has('thunderstorms'),
+      complete
     };
   }
 
+  async function fetchJson(url,label){
+    const r=await fetch(url);
+    if(!r.ok) throw new Error(`${label} ${r.status}`);
+    return r.json();
+  }
+
+  function withQuery(url,key,value){
+    const u=new URL(url);
+    u.searchParams.set(key,value);
+    return u.toString();
+  }
+
   async function nwsPoint(loc){
-    const point=await fetch(`https://api.weather.gov/points/${loc.lat},${loc.lon}`).then(r=>{
-      if(!r.ok) throw new Error(`NWS points ${r.status}`); return r.json();
-    });
+    const point=await fetchJson(
+      `https://api.weather.gov/points/${loc.lat},${loc.lon}`,
+      'NWS points'
+    );
     const p=point.properties;
+    if(!p?.forecastHourly || !p?.forecast || !p?.forecastGridData){
+      throw new Error('NWS points response missing forecast endpoints');
+    }
     const [hourly,forecast,grid]=await Promise.all([
-      fetch(p.forecastHourly).then(r=>r.json()),
-      fetch(p.forecast).then(r=>r.json()),
-      fetch(p.forecastGridData).then(r=>r.json())
+      fetchJson(withQuery(p.forecastHourly,'units','us'),'NWS hourly'),
+      fetchJson(withQuery(p.forecast,'units','us'),'NWS forecast'),
+      fetchJson(p.forecastGridData,'NWS grid')
     ]);
     return {hourly,forecast,grid};
   }
 
   async function getAlerts(){
     const u=`https://api.weather.gov/alerts/active?point=${LOC.palm.lat},${LOC.palm.lon}`;
-    const j=await fetch(u).then(r=>r.json());
-    return j.features || [];
+    const j=await fetchJson(u,'NWS alerts');
+    return Array.isArray(j.features) ? j.features : [];
   }
 
   function decisionFrom(metrics){
     const states=metrics.map(m=>m.state);
     if(states.includes('red')) return {key:'nogo',label:'NO-GO'};
-    if(states.includes('yellow')) return {key:'review',label:'REVIEW'};
     if(states.includes('unknown')) return {key:'pending',label:'待确认'};
+    if(states.includes('yellow')) return {key:'review',label:'REVIEW'};
     return {key:'go',label:'GO'};
   }
 
@@ -1235,64 +1024,63 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
     const isToday=date===nowParts.date;
     const currentHour=isToday ? nowParts.hour : -1;
 
-    const p2=hourlyFor(palm.hourly,date,2);
-    const p8=hourlyFor(palm.hourly,date,8);
+    const p2=hourlyForExact(palm.hourly,date,2);
+    const p8=hourlyForExact(palm.hourly,date,8);
+    const p2Temp=forecastTempF(p2);
+    const p8Temp=forecastTempF(p8);
     const pDaytime=daytimeForecastFor(palm.forecast,date);
-    const pHigh=pDaytime?.temperature ?? null;
+    const pHigh=forecastTempF(pDaytime);
 
     // For today's card, only use the remaining part of the actual C2C windows.
     const lvStart=isToday ? Math.max(10,currentHour) : 10;
     const lvHours=(isToday && currentHour>17) ? [] : hourlyRange(lv.hourly,date,lvStart,17);
-    const lvTemps=lvHours.map(x=>x.temperature).filter(Number.isFinite);
-    const lvTemp=lvTemps.length ? {min:Math.min(...lvTemps),max:Math.max(...lvTemps)} : null;
-    const lvPop=maxFinite(lvHours.map(x=>x.probabilityOfPrecipitation?.value));
+    const lvExpected=Math.max(0,17-lvStart+1);
+    const lvTemps=completeFinite(lvHours.map(forecastTempF),lvExpected);
+    const lvTemp=lvTemps ? {min:Math.min(...lvTemps),max:Math.max(...lvTemps)} : null;
+    const lvPop=completeMax(lvHours.map(forecastPrecipProbability),lvExpected);
     const lvGustProp=lv.grid.properties?.windGust;
-    const lvGust=maxFinite(lvHours.map(p=>
+    const lvGust=completeMax(lvHours.map(p=>
       speedToMph(gridValueAt(lvGustProp,new Date(p.startTime)),lvGustProp?.uom)
-    ));
+    ),lvExpected);
 
-    const pk13=hourlyFor(peak.hourly,date,13);
+    const pk13=hourlyForExact(peak.hourly,date,13);
     const pkStart=isToday ? Math.max(12,currentHour) : 12;
     const pkWindow=(isToday && currentHour>15) ? [] : hourlyRange(peak.hourly,date,pkStart,15);
-    const pkTemp=pk13?.temperature ?? null;
-    const pkWind=maxWindText(pk13?.windSpeed);
+    const pkTemp=forecastTempF(pk13);
+    const pkWindProp=peak.grid.properties?.windSpeed;
+    const pkWind=pk13 ? speedToMph(
+      gridValueAt(pkWindProp,new Date(pk13.startTime)),
+      pkWindProp?.uom
+    ) : null;
 
     const pkGustProp=peak.grid.properties?.windGust;
-    const pkGust=maxFinite(pkWindow.map(p=>
+    const pkExpected=Math.max(0,15-pkStart+1);
+    const pkGust=completeMax(pkWindow.map(p=>
       speedToMph(gridValueAt(pkGustProp,new Date(p.startTime)),pkGustProp?.uom)
-    ));
+    ),pkExpected);
 
-    let pkChill=null;
-    let pkChillSource='windChill';
+    let pkApparent=null;
     if(pk13){
-      const wcProp=peak.grid.properties?.windChill;
       const apparentProp=peak.grid.properties?.apparentTemperature;
-      const wcRaw=gridValueAt(wcProp,new Date(pk13.startTime));
-      pkChill=tempToF(wcRaw,wcProp?.uom);
-      if(pkChill==null){
-        const apparentRaw=gridValueAt(apparentProp,new Date(pk13.startTime));
-        pkChill=tempToF(apparentRaw,apparentProp?.uom);
-        pkChillSource='apparent';
-      }
+      const raw=gridValueAt(apparentProp,new Date(pk13.startTime));
+      pkApparent=tempToF(raw,apparentProp?.uom);
     }
 
-    const pkPop=maxFinite(pkWindow.map(x=>x.probabilityOfPrecipitation?.value));
-    const wx=detectWx(pkWindow);
+    const pkPop=completeMax(pkWindow.map(forecastPrecipProbability),pkExpected);
+    const wx=structuredWeatherFlags(peak.grid,pkWindow,pkExpected);
 
     const thunderProp=peak.grid.properties?.probabilityOfThunder;
-    const pkThunderProb=maxFinite(pkWindow.map(p=>{
-      const raw=gridValueAt(thunderProp,new Date(p.startTime));
-      return Number.isFinite(raw) ? raw : null;
-    }));
+    const pkThunderProb=completeMax(pkWindow.map(p=>
+      gridPercentAt(thunderProp,new Date(p.startTime))
+    ),pkExpected);
 
     const snowStart=isToday ? Math.max(10,currentHour) : 10;
-    const snowLevelInfo=(isToday && currentHour>16) ? null : getSnowLevelFeet(peak,date,snowStart,16);
-    const snowLevel=snowLevelInfo?.value ?? null;
+    const snowLevel=(isToday && currentHour>16) ? null : getSnowLevelFeet(peak,date,snowStart,16);
 
-    // Compare alert validity by Pacific calendar date instead of hard-coding PDT (-07).
+    // NWS CAP event is a structured field; match exact issued heat-event names.
     const heatAlerts=alerts.filter(a=>{
-      const e=(a.properties?.event||'').toLowerCase();
-      if(!e.includes('heat')) return false;
+      const event=a.properties?.event || '';
+      if(!HEAT_EVENTS.has(event)) return false;
       const startRaw=a.properties?.onset || a.properties?.effective;
       const endRaw=a.properties?.ends || a.properties?.expires;
       if(!startRaw || !endRaw) return false;
@@ -1300,42 +1088,18 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
       const endDate=pacificParts(new Date(endRaw)).date;
       return date>=startDate && date<=endDate;
     });
-    const hasHeat=heatAlerts.length>0;
+    const heatAlertNames=[...new Set(heatAlerts.map(a=>a.properties?.event).filter(Boolean))];
+    const hasHeat=heatAlertNames.length>0;
 
     const longTempState=statusLongTempRange(lvTemp,lvPop,lvGust);
 
-    let rainSnowState='green', rainSnowText='None';
-    if(wx.wintry){
-      rainSnowState='red';
-      rainSnowText='Freezing rain / sleet';
-    } else if(wx.snow){
-      rainSnowText=pkPop!=null ? `Snow (${round(pkPop)}%)` : 'Snow signal';
-      rainSnowState=(pkPop!=null && pkPop>30) ? 'red' : 'yellow';
-    } else if(wx.rain){
-      rainSnowText=pkPop!=null ? `Rain (${round(pkPop)}%)` : 'Rain signal';
-      rainSnowState=(pkPop!=null && pkPop>30) ? 'red' : 'yellow';
-    } else if(pkPop==null){
-      rainSnowState='unknown';
-      rainSnowText='NWS未发布';
-    } else if(pkPop>10){
-      rainSnowState='yellow';
-      rainSnowText=`Precip possible (${round(pkPop)}%)`;
-    }
+    let snowState='unknown';
+    const meaningfulSnowLevelTrigger=wx.wintry || wx.snow || (pkPop!=null && pkPop>10);
+    const triggerKnown=pkPop!=null && wx.complete;
 
-    let snowState='unknown', snowText='NWS未发布';
-    const meaningfulSnowLevelTrigger = wx.wintry || wx.snow || (pkPop!=null && pkPop>10);
-    if(!meaningfulSnowLevelTrigger){
+    if(!meaningfulSnowLevelTrigger && triggerKnown){
       snowState='green';
-      if(snowLevel!=null){
-        const rounded=Math.round(snowLevel/100)*100;
-        snowText=`${rounded.toLocaleString()} ft · 无明显降水，不触发`;
-      } else {
-        snowText='无明显降水，不触发';
-      }
-    } else if(snowLevel!=null){
-      const rounded=Math.round(snowLevel/100)*100;
-      snowText=`${rounded.toLocaleString()} ft · ${snowStart}–16时最低`;
-      if(snowLevelInfo?.source==='text') snowText+=' · text fallback';
+    } else if(meaningfulSnowLevelTrigger && snowLevel!=null){
       if(snowLevel<10500) snowState='red';
       else if(snowLevel>12000) snowState='green';
       else snowState='yellow';
@@ -1343,47 +1107,49 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
 
     const metrics=[
       (isToday && currentHour>2) ? pastMetric('Palm Springs 02:00') :
-        metric('Palm Springs 02:00', p2 ? `${p2.temperature}°F` : '—', statusPalmTemp(p2?.temperature,2)),
+        metric('Palm Springs 02:00', p2Temp!=null ? `${round(p2Temp)}°F` : '—', statusPalmTemp(p2Temp,2)),
       (isToday && currentHour>8) ? pastMetric('Palm Springs 08:00') :
-        metric('Palm Springs 08:00', p8 ? `${p8.temperature}°F` : '—', statusPalmTemp(p8?.temperature,8)),
+        metric('Palm Springs 08:00', p8Temp!=null ? `${round(p8Temp)}°F` : '—', statusPalmTemp(p8Temp,8)),
       metric('Palm Springs High', pHigh!=null ? `${round(pHigh)}°F` : '—', statusHigh(pHigh)),
-      metric('Heat Advisory', hasHeat ? 'Yes' : 'No', hasHeat?'red':'green'),
-      (isToday && currentHour>17) ? pastMetric('Long Valley 10–17时温度') :
-        metric(isToday && currentHour>10 ? 'Long Valley 剩余时段温度' : 'Long Valley 10–17时温度',
-          lvTemp ? `${round(lvTemp.min)}–${round(lvTemp.max)}°F` : '—', longTempState),
-      (isToday && currentHour>17) ? pastMetric('Long Valley 降水') :
-        metric('Long Valley 降水', lvPop!=null ? `${round(lvPop)}%` : '—', statusPrecip(lvPop)),
-      (isToday && currentHour>17) ? pastMetric('Long Valley Gust') :
-        metric('Long Valley Gust', lvGust!=null ? `${round(lvGust)} mph` : '—', statusLongGust(lvGust)),
-      (isToday && currentHour>13) ? pastMetric('Peak 13:00 温度') :
-        metric('Peak 13:00 温度', pkTemp!=null ? `${round(pkTemp)}°F` : '—', statusPeakTemp(pkTemp)),
-      (isToday && currentHour>13) ? pastMetric('Peak Wind Chill') :
-        metric('Peak Wind Chill',
-          pkChill!=null ? `${round(pkChill)}°F${pkChillSource==='apparent'?' · feels-like fallback':''}` : '—',
-          statusChill(pkChill)),
-      (isToday && currentHour>13) ? pastMetric('Peak sustained wind') :
-        metric('Peak sustained wind', pkWind!=null ? `${round(pkWind)} mph` : '—', statusWind(pkWind)),
-      (isToday && currentHour>15) ? pastMetric('Peak Gust 12–15时') :
-        metric(isToday && currentHour>12 ? 'Peak Gust 剩余时段' : 'Peak Gust 12–15时',
-          pkGust!=null ? `${round(pkGust)} mph` : '—', statusGust(pkGust)),
-      (isToday && currentHour>15) ? pastMetric('Peak 降水概率 12–15时') :
-        metric('Peak 降水概率 12–15时', pkPop!=null ? `${round(pkPop)}%` : '—', statusPrecip(pkPop)),
-      (isToday && currentHour>16) ? pastMetric('Snow level') :
-        metric('Snow level', snowText, snowState),
-      (isToday && currentHour>15) ? pastMetric('Thunderstorm') :
-        metric('Thunderstorm',
-          pkThunderProb!=null
-            ? `${pkThunderProb>=10?'Yes':'No'} (${round(pkThunderProb)}%)`
-            : (wx.thunder ? 'Yes · text forecast' : '—'),
-          pkThunderProb!=null ? statusThunder(pkThunderProb) : (wx.thunder?'red':'unknown'))
+      metric('NWS 高温警报', hasHeat ? heatAlertNames.join(' / ') : '无', hasHeat?'red':'green'),
+      (isToday && currentHour>17) ? pastMetric('Long Valley 温度','10–17时') :
+        metric('Long Valley 温度',
+          lvTemp ? `${round(lvTemp.min)}–${round(lvTemp.max)}°F` : '—', longTempState,
+          isToday && currentHour>10 ? '剩余时段' : '10–17时'),
+      (isToday && currentHour>17) ? pastMetric('Long Valley 降水概率','10–17时 · 最高小时') :
+        metric('Long Valley 降水概率', lvPop!=null ? `${round(lvPop)}%` : '—', statusPrecip(lvPop), '10–17时 · 最高小时'),
+      (isToday && currentHour>17) ? pastMetric('Long Valley 阵风','10–17时') :
+        metric('Long Valley 阵风', lvGust!=null ? `${round(lvGust)} mph` : '—', statusLongGust(lvGust), '10–17时'),
+      (isToday && currentHour>13) ? pastMetric('Peak 温度','13:00') :
+        metric('Peak 温度', pkTemp!=null ? `${round(pkTemp)}°F` : '—', statusPeakTemp(pkTemp), '13:00'),
+      (isToday && currentHour>13) ? pastMetric('Peak 体感温度','13:00') :
+        metric('Peak 体感温度',
+          pkApparent!=null ? `${round(pkApparent)}°F` : '—',
+          statusApparent(pkApparent), '13:00'),
+      (isToday && currentHour>13) ? pastMetric('Peak 风速','13:00') :
+        metric('Peak 风速', pkWind!=null ? `${round(pkWind)} mph` : '—', statusWind(pkWind), '13:00'),
+      (isToday && currentHour>15) ? pastMetric('Peak 阵风','12–15时') :
+        metric('Peak 阵风',
+          pkGust!=null ? `${round(pkGust)} mph` : '—', statusGust(pkGust),
+          isToday && currentHour>12 ? '剩余时段' : '12–15时'),
+      (isToday && currentHour>15) ? pastMetric('Peak 降水概率','12–15时 · 最高小时') :
+        metric('Peak 降水概率', pkPop!=null ? `${round(pkPop)}%` : '—', statusPrecip(pkPop), '12–15时 · 最高小时'),
+      (isToday && currentHour>16) ? pastMetric('雪线高度') :
+        metric('雪线高度', snowLevel!=null ? `${Math.round(snowLevel/100)*100 >= 1000 ? (Math.round(snowLevel/100)*100).toLocaleString() : Math.round(snowLevel)} ft` : (snowState==='green' ? '—' : '未发布'), snowState, snowState==='green' ? '无明显降水 · 不触发' : (snowLevel!=null ? `${snowStart}–16时最低` : 'NWS 未发布')),
+      (isToday && currentHour>15) ? pastMetric('雷暴概率','12–15时 · 最高小时') :
+        metric('雷暴概率',
+          pkThunderProb!=null ? `${round(pkThunderProb)}%` : (wx.thunder ? '有信号' : '未发布'),
+          pkThunderProb!=null ? statusThunder(pkThunderProb) : (wx.complete ? (wx.thunder ? 'red' : 'green') : 'unknown'),
+          pkThunderProb!=null ? '12–15时 · 最高小时' : (wx.complete ? (wx.thunder ? 'weather grid 明确雷暴' : 'weather grid 无雷暴信号') : 'NWS 数据不完整'))
     ];
 
     return {date,metrics,isToday};
   }
 
   function fmtDate(s){
-    const d=new Date(`${s}T12:00:00-07:00`);
-    return new Intl.DateTimeFormat('zh-CN',{timeZone:TZ,month:'numeric',day:'numeric',weekday:'short'}).format(d);
+    const [y,m,d]=s.split('-').map(Number);
+    const dt=new Date(Date.UTC(y,m-1,d,12,0,0));
+    return new Intl.DateTimeFormat('zh-CN',{timeZone:'UTC',month:'numeric',day:'numeric',weekday:'short'}).format(dt);
   }
 
   function render(days){
@@ -1400,7 +1166,8 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
         </div>
         <div class="metric-grid">
           ${regularMetrics.map(m=>`<div class="live-metric ${m.state}">
-            <span>${m.label}</span><strong>${m.value}</strong>
+            <span class="metric-label"><span>${m.label}</span>${m.detail?`<small>${m.detail}</small>`:''}</span>
+            <strong>${m.value}</strong>
           </div>`).join('')}
         </div>
       </article>`;
@@ -1408,129 +1175,204 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
   }
 
 
+  function validateOpenMeteoPayload(data,loc){
+    const u=data?.hourly_units || {};
+    const checks=[
+      ['temperature_2m', new Set(['°F'])],
+      ['apparent_temperature', new Set(['°F'])],
+      ['precipitation_probability', new Set(['%'])],
+      ['snowfall', new Set(['inch'])],
+      ['wind_speed_10m', new Set(['mp/h','mph'])],
+      ['wind_gusts_10m', new Set(['mp/h','mph'])]
+    ];
+    for(const [key,allowed] of checks){
+      if(!allowed.has(u[key])) throw new Error(`Open-Meteo unexpected unit ${key}: ${u[key] ?? 'missing'}`);
+    }
+
+    const times=data?.hourly?.time;
+    if(!Array.isArray(times) || !times.length || !times.every(Number.isFinite)){
+      throw new Error('Open-Meteo expected Unix hourly timestamps');
+    }
+    for(let i=1;i<times.length;i++){
+      if(times[i]-times[i-1]!==3600) throw new Error('Open-Meteo hourly timestamps are not continuous 1-hour steps');
+    }
+
+    for(const [key] of checks){
+      const arr=data?.hourly?.[key];
+      if(!Array.isArray(arr) || arr.length!==times.length){
+        throw new Error(`Open-Meteo hourly array length mismatch: ${key}`);
+      }
+    }
+
+    if(data?.utc_offset_seconds!==0){
+      throw new Error(`Open-Meteo expected GMT/UTC offset 0, got ${data?.utc_offset_seconds}`);
+    }
+    if(loc.elevation!=null && Number.isFinite(data?.elevation) && Math.abs(data.elevation-loc.elevation)>10){
+      throw new Error(`Open-Meteo elevation mismatch: requested ${loc.elevation} m, got ${data.elevation} m`);
+    }
+  }
+
   async function openMeteoPoint(loc){
     const params = new URLSearchParams({
       latitude:String(loc.lat),
       longitude:String(loc.lon),
-      hourly:'temperature_2m,apparent_temperature,precipitation_probability,rain,snowfall,wind_speed_10m,wind_gusts_10m,weather_code',
-      daily:'temperature_2m_max',
+      hourly:'temperature_2m,apparent_temperature,precipitation_probability,snowfall,wind_speed_10m,wind_gusts_10m',
       temperature_unit:'fahrenheit',
       wind_speed_unit:'mph',
       precipitation_unit:'inch',
-      timezone:TZ,
+      timeformat:'unixtime',
+      timezone:'GMT',
       forecast_days:'16'
     });
     if(loc.elevation!=null) params.set('elevation',String(loc.elevation));
     const r = await fetch(`https://api.open-meteo.com/v1/forecast?${params.toString()}`);
     if(!r.ok) throw new Error(`Open-Meteo ${r.status}`);
-    return r.json();
+    const data=await r.json();
+    validateOpenMeteoPayload(data,loc);
+    return data;
+  }
+
+  function omParts(data,i){
+    const t=data?.hourly?.time?.[i];
+    return Number.isFinite(t) ? pacificParts(new Date(t*1000)) : null;
   }
 
   function omIndex(data,date,hour){
-    const key=`${date}T${String(hour).padStart(2,'0')}:00`;
-    return data?.hourly?.time?.indexOf(key) ?? -1;
+    const times=data?.hourly?.time || [];
+    for(let i=0;i<times.length;i++){
+      const p=omParts(data,i);
+      if(p?.date===date && p.hour===hour) return i;
+    }
+    return -1;
   }
 
   function omRangeIndices(data,date,startHour,endHour){
     const out=[];
     const times=data?.hourly?.time || [];
     for(let i=0;i<times.length;i++){
-      if(!times[i].startsWith(date+'T')) continue;
-      const h=+times[i].slice(11,13);
-      if(h>=startHour && h<=endHour) out.push(i);
+      const p=omParts(data,i);
+      if(p?.date===date && p.hour>=startHour && p.hour<=endHour) out.push(i);
     }
     return out;
   }
 
-  function omDayIndices(data,date){
-    const times=data?.hourly?.time || [];
+  // 降水概率, snowfall and gust represent the preceding hour.
+  // Classify each interval by the Pacific local time at which that interval starts.
+  // This stays correct across the Nov DST transition.
+  function omPrecedingHourIndices(data,date,startHour,endHour){
     const out=[];
-    for(let i=0;i<times.length;i++) if(times[i].startsWith(date+'T')) out.push(i);
+    const times=data?.hourly?.time || [];
+    for(let i=0;i<times.length;i++){
+      const t=times[i];
+      if(!Number.isFinite(t)) continue;
+      const start=pacificParts(new Date((t-3600)*1000));
+      if(start.date===date && start.hour>=startHour && start.hour<=endHour) out.push(i);
+    }
     return out;
   }
 
-  function arrMax(arr){
-    const vals=arr.filter(v=>v!=null && Number.isFinite(v));
-    return vals.length ? Math.max(...vals) : null;
+  function omLocalDayIndices(data,date){
+    const out=[];
+    const times=data?.hourly?.time || [];
+    for(let i=0;i<times.length;i++){
+      if(omParts(data,i)?.date===date) out.push(i);
+    }
+    return out;
   }
 
-  function arrSum(arr){
-    const vals=arr.filter(v=>v!=null && Number.isFinite(v));
-    return vals.length ? vals.reduce((a,b)=>a+b,0) : null;
+  function omHasCompleteLocalDay(data,date){
+    const indices=omLocalDayIndices(data,date);
+    if(indices.length<23 || indices.length>25) return false;
+    const times=indices.map(i=>data.hourly.time[i]);
+    if(!times.every(Number.isFinite)) return false;
+    for(let i=1;i<times.length;i++) if(times[i]-times[i-1]!==3600) return false;
+    const first=omParts(data,indices[0]);
+    const last=omParts(data,indices[indices.length-1]);
+    return first?.hour===0 && last?.hour===23;
+  }
+
+  function completeValues(data,key,indices,expectedCount=null){
+    if(expectedCount!=null && indices.length!==expectedCount) return null;
+    const arr=indices.map(i=>data?.hourly?.[key]?.[i]);
+    return arr.length && arr.every(Number.isFinite) ? arr : null;
+  }
+
+  function omMax(data,key,indices,expectedCount=null){
+    const vals=completeValues(data,key,indices,expectedCount);
+    return vals ? Math.max(...vals) : null;
+  }
+
+  function omSum(data,key,indices,expectedCount=null){
+    const vals=completeValues(data,key,indices,expectedCount);
+    return vals ? vals.reduce((a,b)=>a+b,0) : null;
   }
 
   function availableTrendDates(data, formalDates){
     const formalLast=formalDates[formalDates.length-1];
-    const dates=[...new Set((data?.hourly?.time||[]).map(t=>t.slice(0,10)))];
-    return dates.filter(d=>d>formalLast);
+    const dates=[...new Set((data?.hourly?.time||[])
+      .map((_,i)=>omParts(data,i)?.date)
+      .filter(Boolean))];
+    return dates.filter(d=>d>formalLast && omHasCompleteLocalDay(data,d));
   }
 
 
-  function trendStateLabel(state){
-    return state==='green' ? 'GO' :
-           state==='yellow' ? 'REVIEW' :
-           state==='red' ? 'NO-GO' : '—';
-  }
 
-  function trendWxState({freezing,snowSignal,rainSignal,pop}){
-    if(freezing) return 'red';
-    if(snowSignal) return (pop!=null && pop>30) ? 'red' : 'yellow';
-    if(rainSignal) return (pop!=null && pop>30) ? 'red' : 'yellow';
-    if(pop==null) return 'unknown';
-    if(pop>30) return 'yellow';
-    if(pop>10) return 'yellow';
-    return 'green';
-  }
 
-  function trendMetric(label,value,state){
-    return {label,value,state};
+  function trendMetric(label,value,state,detail=''){
+    return {label,value,state,detail};
   }
 
 
-  function omDailyValue(data,date,key){
-    const times=data?.daily?.time || [];
-    const i=times.indexOf(date);
-    return i>=0 ? (data?.daily?.[key]?.[i] ?? null) : null;
-  }
 
   function buildTrendDay(date,palm,longValley,peak){
     const p2=omIndex(palm,date,2);
-    const palm2=p2>=0 ? palm.hourly.temperature_2m?.[p2] : null;
-    const palmHigh=omDailyValue(palm,date,'temperature_2m_max');
+    const palm2=p2>=0 && Number.isFinite(palm.hourly.temperature_2m?.[p2]) ? palm.hourly.temperature_2m[p2] : null;
 
-    const lvWindow=omRangeIndices(longValley,date,10,17);
-    const lvTemps=lvWindow.map(i=>longValley.hourly.temperature_2m?.[i]).filter(Number.isFinite);
-    const lvTempRange=lvTemps.length ? {min:Math.min(...lvTemps),max:Math.max(...lvTemps)} : null;
-    const lvGust=arrMax(lvWindow.map(i=>longValley.hourly.wind_gusts_10m?.[i]));
-    const lvPop=arrMax(lvWindow.map(i=>longValley.hourly.precipitation_probability?.[i]));
+    // Open-Meteo daily max is documented as a simple aggregation of hourly values.
+    // Compute the max over the true Pacific local day so DST boundaries remain correct.
+    const palmDay=omLocalDayIndices(palm,date);
+    const palmHigh=omHasCompleteLocalDay(palm,date) ? omMax(palm,'temperature_2m',palmDay) : null;
+
+    const lvTempWindow=omRangeIndices(longValley,date,10,17);
+    const lvPrecedingWindow=omPrecedingHourIndices(longValley,date,10,17);
+    const lvTemps=completeValues(longValley,'temperature_2m',lvTempWindow,8);
+    const lvTempRange=lvTemps ? {min:Math.min(...lvTemps),max:Math.max(...lvTemps)} : null;
+    const lvGust=omMax(longValley,'wind_gusts_10m',lvPrecedingWindow,8);
+    const lvPop=omMax(longValley,'precipitation_probability',lvPrecedingWindow,8);
 
     const p13=omIndex(peak,date,13);
-    const peakTemp=p13>=0 ? peak.hourly.temperature_2m?.[p13] : null;
-    const peakFeels=p13>=0 ? peak.hourly.apparent_temperature?.[p13] : null;
-    const peakWind=p13>=0 ? peak.hourly.wind_speed_10m?.[p13] : null;
+    const peakTemp=p13>=0 && Number.isFinite(peak.hourly.temperature_2m?.[p13])
+      ? peak.hourly.temperature_2m[p13] : null;
+    const peakFeels=p13>=0 && Number.isFinite(peak.hourly.apparent_temperature?.[p13])
+      ? peak.hourly.apparent_temperature[p13] : null;
+    const peakWind=p13>=0 && Number.isFinite(peak.hourly.wind_speed_10m?.[p13])
+      ? peak.hourly.wind_speed_10m[p13] : null;
 
-    const windWindow=omRangeIndices(peak,date,12,15);
-    const gust=arrMax(windWindow.map(i=>peak.hourly.wind_gusts_10m?.[i]));
-    const pop=arrMax(windWindow.map(i=>peak.hourly.precipitation_probability?.[i]));
+    // Four NWS-style hourly periods beginning 12,13,14,15 -> Open-Meteo end stamps 13..16.
+    const peakPrecedingWindow=omPrecedingHourIndices(peak,date,12,15);
+    const gust=omMax(peak,'wind_gusts_10m',peakPrecedingWindow,4);
+    const pop=omMax(peak,'precipitation_probability',peakPrecedingWindow,4);
 
-    const snowWindow=omRangeIndices(peak,date,12,16);
-    const snowfall=arrSum(snowWindow.map(i=>peak.hourly.snowfall?.[i]));
+    // Five hourly periods beginning 12..16 -> cumulative interval 12:00–17:00.
+    const snowWindow=omPrecedingHourIndices(peak,date,12,16);
+    const snowfall=omSum(peak,'snowfall',snowWindow,5);
 
     const metrics=[
       trendMetric('Palm Springs 02:00', palm2!=null ? `${round(palm2)}°F` : '—', statusPalmTemp(palm2,2)),
       trendMetric('Palm Springs High', palmHigh!=null ? `${round(palmHigh)}°F` : '—', statusHigh(palmHigh)),
       trendMetric(
-        'Long Valley 10–17时温度',
+        'Long Valley 温度',
         lvTempRange ? `${round(lvTempRange.min)}–${round(lvTempRange.max)}°F` : '—',
-        statusLongTempRange(lvTempRange,lvPop,lvGust)
+        statusLongTempRange(lvTempRange,lvPop,lvGust), '10–17时'
       ),
-      trendMetric('Long Valley Gust 10–17时', lvGust!=null ? `${round(lvGust)} mph` : '—', statusLongGust(lvGust)),
-      trendMetric('Peak 13:00 温度', peakTemp!=null ? `${round(peakTemp)}°F` : '—', statusPeakTemp(peakTemp)),
-      trendMetric('Peak 13:00 体感', peakFeels!=null ? `${round(peakFeels)}°F` : '—', statusChill(peakFeels)),
-      trendMetric('Peak sustained wind 13:00', peakWind!=null ? `${round(peakWind)} mph` : '—', statusWind(peakWind)),
-      trendMetric('Peak Gust 12–15时', gust!=null ? `${round(gust)} mph` : '—', statusGust(gust)),
-      trendMetric('Peak 降水概率 12–15时', pop!=null ? `${round(pop)}%` : '—', statusPrecip(pop)),
-      trendMetric('Peak Snowfall 12–16时', formatSnowfall(snowfall), statusSnowfall(snowfall))
+      trendMetric('Long Valley 降水概率', lvPop!=null ? `${round(lvPop)}%` : '—', statusPrecip(lvPop), '10–17时 · 最高小时'),
+      trendMetric('Long Valley 阵风', lvGust!=null ? `${round(lvGust)} mph` : '—', statusLongGust(lvGust), '10–17时'),
+      trendMetric('Peak 温度', peakTemp!=null ? `${round(peakTemp)}°F` : '—', statusPeakTemp(peakTemp), '13:00'),
+      trendMetric('Peak 体感温度', peakFeels!=null ? `${round(peakFeels)}°F` : '—', statusApparent(peakFeels), '13:00'),
+      trendMetric('Peak 风速', peakWind!=null ? `${round(peakWind)} mph` : '—', statusWind(peakWind), '13:00'),
+      trendMetric('Peak 阵风', gust!=null ? `${round(gust)} mph` : '—', statusGust(gust), '12–15时'),
+      trendMetric('Peak 降水概率', pop!=null ? `${round(pop)}%` : '—', statusPrecip(pop), '12–15时 · 最高小时'),
+      trendMetric('Peak 降雪量', formatSnowfall(snowfall), statusSnowfall(snowfall), '12:00–17:00 累计')
     ];
 
     return {date,metrics};
@@ -1554,10 +1396,9 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
         </div>
         <div class="trend-grid">
           ${day.metrics.map(m=>`<div class="trend-metric ${m.state}">
-            <span>${m.label}</span>
+            <span class="metric-label"><span>${m.label}</span>${m.detail?`<small>${m.detail}</small>`:''}</span>
             <div class="trend-value">
               <strong>${m.value}</strong>
-              <span class="trend-state ${m.state}">${trendStateLabel(m.state)}</span>
             </div>
           </div>`).join('')}
         </div>
@@ -1574,7 +1415,10 @@ Deer Springs Trail from the trailhead to Little Round Valley was cleared of the 
         openMeteoPoint(LOC.long),
         openMeteoPoint(LOC.peak)
       ]);
-      const dates=availableTrendDates(peakTrend,formalDates);
+      const dates=availableTrendDates(peakTrend,formalDates).filter(date=>
+        omHasCompleteLocalDay(palmTrend,date) &&
+        omHasCompleteLocalDay(longTrend,date)
+      );
       const days=dates.map(date=>buildTrendDay(date,palmTrend,longTrend,peakTrend));
       renderTrend(days);
       return days.length;
